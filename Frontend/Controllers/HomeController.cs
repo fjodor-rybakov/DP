@@ -26,7 +26,7 @@ namespace Frontend.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(string data)
         {
-            string id = await GetData(data);
+            string id = await SendData(data);
 
             Console.WriteLine("DATA: " + data);
             Console.WriteLine("ID: " + id);
@@ -39,7 +39,7 @@ namespace Frontend.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task<string> GetData(string data)
+        private async Task<string> SendData(string data)
         {
             HttpContent content = new StringContent(data);
 
@@ -47,10 +47,7 @@ namespace Frontend.Controllers
             HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/values", content);
             using (HttpContent responseContent = response.Content)
             {
-                Task<string> res = responseContent.ReadAsStringAsync();
-                string d = await res;
-                // Console.WriteLine("RESPONSE: " + d);
-                return d;
+                return await responseContent.ReadAsStringAsync();
             }
         }
     }
