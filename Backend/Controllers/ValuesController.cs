@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
+using StackExchange.Redis;
 
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        // private ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost:6379");
         static readonly ConcurrentDictionary<string, string> _data = new ConcurrentDictionary<string, string>();
 
         // GET api/values/<id>
@@ -23,11 +25,19 @@ namespace Backend.Controllers
 
         // POST api/values
         [HttpPost]
-        public string Post([FromForm]string value)
+        public string Post([FromBody]string value)
         {
             var id = Guid.NewGuid().ToString();
             _data[id] = value;
             Console.WriteLine(id);
+            Console.WriteLine(value);
+            var db = RedisStore.RedisCache;
+            db.StringSet(id, value);
+            string res = db.StringGet(id);
+            Console.WriteLine(res);
+            var pub = db.Multiplexer.GetSubscriber();
+            pub.Publish("events", id);
+
             return id;
         }
     }

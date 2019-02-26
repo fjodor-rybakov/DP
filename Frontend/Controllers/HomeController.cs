@@ -41,14 +41,9 @@ namespace Frontend.Controllers
 
         private async Task<string> SendData(string data)
         {
-            HttpContent content = new StringContent(data);
-
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/values", content);
-            using (HttpContent responseContent = response.Content)
-            {
-                return await responseContent.ReadAsStringAsync();
-            }
+            HttpResponseMessage response = await client.PostAsJsonAsync("http://localhost:5000/api/values", data);
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

@@ -30,9 +30,11 @@ if defined version (
 		xcopy %path_backend_publish% /S
 		
 		cd..
+		echo port_frontend:5001 > config.txt
+		echo port_backend:5000 >> config.txt
 		echo start dotnet Frontend\Frontend.dll > run.bat
 		echo start dotnet Backend\Backend.dll >> run.bat
-
+		
 		echo taskkill /IM dotnet.exe /F > stop.bat
 	) else (
 		cd..
