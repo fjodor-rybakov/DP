@@ -29,14 +29,12 @@ namespace Backend.Controllers
         {
             var id = Guid.NewGuid().ToString();
             _data[id] = value;
-            Console.WriteLine(id);
-            Console.WriteLine(value);
             var db = RedisStore.RedisCache;
             db.StringSet(id, value);
-            string res = db.StringGet(id);
-            Console.WriteLine(res);
             var pub = db.Multiplexer.GetSubscriber();
             pub.Publish("events", id);
+            // string res = db.StringGet(id);
+            // Console.WriteLine(res);
 
             return id;
         }
