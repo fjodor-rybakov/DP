@@ -1,12 +1,17 @@
 @echo off
 set version=%1
-set path_build=D:\work\DP\build
-set path_frontend=D:\work\DP\Frontend
-set path_backend=D:\work\DP\Backend
-set path_text_lisener=D:\work\DP\TextListener
+set work_dir=D:\work\DP
+
+set path_build=%work_dir%\build
+set path_frontend=%work_dir%\Frontend
+set path_backend=%work_dir%\Backend
+set path_text_lisener=%work_dir%\TextListener
+set path_text_rank_calc=%work_dir%\TextRankCalc
+
 set path_frontend_publish=%path_frontend%\bin\Debug\netcoreapp2.2\publish
 set path_backend_publish=%path_backend%\bin\Debug\netcoreapp2.2\publish
 set path_text_lisener_publish=%path_text_lisener%\bin\Debug\netcoreapp2.2\publish
+set path_text_rank_calc_publish=%path_text_rank_calc%\bin\Debug\netcoreapp2.2\publish
 
 if defined version (
 	cd %path_frontend%
@@ -14,6 +19,8 @@ if defined version (
 	cd %path_backend%
 	dotnet publish
 	cd %path_text_lisener%
+	dotnet publish
+	cd %path_text_rank_calc%
 	dotnet publish
 	
 	cd..
@@ -36,6 +43,10 @@ if defined version (
 		mkdir TextListener
 		cd TextListener
 		xcopy %path_text_lisener_publish% /S
+		cd..
+		mkdir TextRankCalc
+		cd TextRankCalc
+		xcopy %path_text_rank_calc_publish% /S
 		
 		cd..
 		echo port_frontend:5001 > config.txt
@@ -45,6 +56,7 @@ if defined version (
 		echo start dotnet Frontend\Frontend.dll >> run.bat
 		echo start dotnet Backend\Backend.dll >> run.bat
 		echo start dotnet TextListener\TextListener.dll >> run.bat
+		echo start dotnet TextRankCalc\TextRankCalc.dll >> run.bat
 		
 		echo taskkill /IM dotnet.exe /F > stop.bat
 		echo taskkill /IM redis-server.exe /F >> stop.bat

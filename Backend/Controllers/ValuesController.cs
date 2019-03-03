@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 using StackExchange.Redis;
+using System.Threading;
 
 namespace Backend.Controllers
 {
@@ -18,7 +19,19 @@ namespace Backend.Controllers
         public string Get(string id)
         {
             string value = null;
-            _data.TryGetValue(id, out value);
+            var db = RedisStore.RedisCache;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (db.KeyExists($"RANK_{id}"))
+                {
+                    value = db.StringGet($"RANK_{id}");
+                    break;
+                }
+                else
+                    Thread.Sleep(500);
+            }
+
             return value;
         }
 

@@ -1,0 +1,11 @@
+D:\work\DP\textrankcalc\bin\Debug\netcoreapp2.2\textrankcalc.deps.json
+D:\work\DP\textrankcalc\bin\Debug\netcoreapp2.2\textrankcalc.runtimeconfig.json
+D:\work\DP\textrankcalc\bin\Debug\netcoreapp2.2\textrankcalc.runtimeconfig.dev.json
+D:\work\DP\textrankcalc\bin\Debug\netcoreapp2.2\textrankcalc.dll
+D:\work\DP\textrankcalc\bin\Debug\netcoreapp2.2\textrankcalc.pdb
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.csprojAssemblyReference.cache
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.csproj.CoreCompileInputs.cache
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.AssemblyInfoInputs.cache
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.AssemblyInfo.cs
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.dll
+D:\work\DP\textrankcalc\obj\Debug\netcoreapp2.2\textrankcalc.pdb

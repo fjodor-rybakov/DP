@@ -23,15 +23,23 @@ namespace Frontend.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> TextDetails(string id)
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/api/values/{id}");
+            string relation =  await response.Content.ReadAsStringAsync();
+            ViewData["relation"] = relation;
+
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Upload(string data)
         {
             string id = await SendData(data);
 
-            Console.WriteLine("DATA: " + data);
-            Console.WriteLine("ID: " + id);
-            
-            return Ok(id);
+            return Redirect("TextDetails/" + id);
         }
 
         public IActionResult Error()

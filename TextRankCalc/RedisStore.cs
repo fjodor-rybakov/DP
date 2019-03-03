@@ -2,7 +2,7 @@ using StackExchange.Redis;
 using System;
 using System.Configuration;
 
-namespace Backend.Controllers
+namespace TextRankCalc
 {
     public class RedisStore
     {

@@ -54,3 +54,4 @@ D:\work\DP\frontend\obj\Debug\netcoreapp2.2\Frontend.Views.pdb
 D:\work\DP\frontend\obj\Debug\netcoreapp2.2\Frontend.dll
 D:\work\DP\frontend\obj\Debug\netcoreapp2.2\Frontend.pdb
 D:\work\DP\frontend\obj\Debug\netcoreapp2.2\Frontend.csproj.CopyComplete
+D:\work\DP\frontend\obj\Debug\netcoreapp2.2\Razor\Views\Home\TextDetails.g.cshtml.cs
