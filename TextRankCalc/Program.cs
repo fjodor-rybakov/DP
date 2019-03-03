@@ -16,18 +16,18 @@ namespace TextRankCalc
                 string str = db.StringGet(id);
 
                 if (Regex.IsMatch(str, "[А-Яа-я]")) 
-                    Console.WriteLine("String contain unknown letters");
+                    Console.WriteLine("String contain unknown char");
                 else
                 {
                     int countGlasn = Regex.Matches(str, @"[aiueoy]", RegexOptions.IgnoreCase).Count;
                     int countSoglasn = Regex.Matches(str, @"[bcdfghjklmnpqrstvwxz]", RegexOptions.IgnoreCase).Count;
-                    double relation = (double)countGlasn / (double)countSoglasn;
+                    double relation = countSoglasn == 0 ? 0 : (double)countGlasn / (double)countSoglasn;
 
                     db.StringSet($"RANK_{id}", relation);
                 }
                 Console.WriteLine("Value: " + str);
             });
-            Console.WriteLine("Obsevable subscribe Text rank calc is ready. For exit press Enter.");
+            Console.WriteLine("Obsevable subscribe text rank calc is ready. For exit press Enter.");
             Console.ReadLine();
         }
     }

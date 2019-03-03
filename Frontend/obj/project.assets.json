@@ -14218,13 +14218,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.2.1",
     "restore": {
-      "projectUniqueName": "d:\\work\\DP\\Frontend\\Frontend.csproj",
+      "projectUniqueName": "D:\\work\\DP\\Frontend\\Frontend.csproj",
       "projectName": "Frontend",
-      "projectPath": "d:\\work\\DP\\Frontend\\Frontend.csproj",
+      "projectPath": "D:\\work\\DP\\Frontend\\Frontend.csproj",
       "packagesPath": "C:\\Users\\fedor\\.nuget\\packages\\",
-      "outputPath": "d:\\work\\DP\\Frontend\\obj\\",
+      "outputPath": "D:\\work\\DP\\Frontend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

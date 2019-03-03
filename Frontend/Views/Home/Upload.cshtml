@@ -5,7 +5,7 @@
     <h2>Форма ввода</h2>
     @using(Html.BeginForm("Upload", "Home", FormMethod.Post))
     {
-        <input name="data" type="text"/><br>
+        <input name="data" type="text" required="required"/><br>
         <input type="submit">
     }
 </div>

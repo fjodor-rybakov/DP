@@ -15,7 +15,7 @@ namespace TextListener
                 string res = redis.StringGet((string)message);
                 Console.WriteLine("Value: " + res);
             });
-            Console.WriteLine("Obsevable subscribe Text listener is ready. For exit press Enter.");
+            Console.WriteLine("Obsevable subscribe text listener is ready. For exit press Enter.");
             Console.ReadLine();
         }
     }

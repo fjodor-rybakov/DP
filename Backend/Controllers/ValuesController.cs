@@ -20,19 +20,21 @@ namespace Backend.Controllers
         {
             string value = null;
             var db = RedisStore.RedisCache;
+            bool isError = true;
 
             for (int i = 0; i < 3; i++)
             {
                 if (db.KeyExists($"RANK_{id}"))
                 {
                     value = db.StringGet($"RANK_{id}");
+                    isError = false;
                     break;
                 }
                 else
                     Thread.Sleep(500);
             }
 
-            return value;
+            return isError ? "String contain unknown chars" : value;
         }
 
         // POST api/values

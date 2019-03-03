@@ -1,0 +1,14 @@
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\Backend.deps.json
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\Backend.runtimeconfig.json
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\Backend.runtimeconfig.dev.json
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\Backend.dll
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\Backend.pdb
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.csprojAssemblyReference.cache
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.csproj.CoreCompileInputs.cache
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.RazorAssemblyInfo.cache
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.RazorAssemblyInfo.cs
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.AssemblyInfoInputs.cache
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.AssemblyInfo.cs
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.RazorTargetAssemblyInfo.cache
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.dll
+D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.pdb
