@@ -1,11 +1,15 @@
 
 
 Backend/bin/*
+Backend/obj/*
 
 Frontend/bin/*
+Frontend/obj/*
 
 TextListener/bin/*
+TextListener/obj/*
 
 TextRankCalc/bin/*
+TextRankCalc/obj/*
 
 build
