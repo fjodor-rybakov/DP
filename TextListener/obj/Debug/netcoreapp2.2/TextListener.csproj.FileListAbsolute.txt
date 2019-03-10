@@ -9,3 +9,6 @@ D:\work\DP\TextListener\obj\Debug\netcoreapp2.2\TextListener.AssemblyInfoInputs.
 D:\work\DP\TextListener\obj\Debug\netcoreapp2.2\TextListener.AssemblyInfo.cs
 D:\work\DP\TextListener\obj\Debug\netcoreapp2.2\TextListener.dll
 D:\work\DP\TextListener\obj\Debug\netcoreapp2.2\TextListener.pdb
+D:\work\DP\TextListener\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\TextListener\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\TextListener\obj\Debug\netcoreapp2.2\TextListener.csproj.CopyComplete

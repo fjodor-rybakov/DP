@@ -1,4 +1,5 @@
 ﻿using System;
+using Redis;
 using StackExchange.Redis;
 
 namespace TextListener

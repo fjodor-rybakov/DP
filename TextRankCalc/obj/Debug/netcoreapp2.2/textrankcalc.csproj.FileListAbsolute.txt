@@ -9,3 +9,6 @@ D:\work\DP\TextRankCalc\obj\Debug\netcoreapp2.2\textrankcalc.AssemblyInfoInputs.
 D:\work\DP\TextRankCalc\obj\Debug\netcoreapp2.2\textrankcalc.AssemblyInfo.cs
 D:\work\DP\TextRankCalc\obj\Debug\netcoreapp2.2\textrankcalc.dll
 D:\work\DP\TextRankCalc\obj\Debug\netcoreapp2.2\textrankcalc.pdb
+D:\work\DP\TextRankCalc\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\TextRankCalc\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\TextRankCalc\obj\Debug\netcoreapp2.2\textrankcalc.csproj.CopyComplete

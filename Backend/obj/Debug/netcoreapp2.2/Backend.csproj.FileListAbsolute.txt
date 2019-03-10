@@ -12,3 +12,6 @@ D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.AssemblyInfo.cs
 D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.RazorTargetAssemblyInfo.cache
 D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.dll
 D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.pdb
+D:\work\DP\backend\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\backend\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\backend\obj\Debug\netcoreapp2.2\Backend.csproj.CopyComplete

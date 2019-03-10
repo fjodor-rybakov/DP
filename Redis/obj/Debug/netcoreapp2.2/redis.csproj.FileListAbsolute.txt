@@ -1,0 +1,4 @@
+D:\work\DP\redis\obj\Debug\netcoreapp2.2\redis.csprojAssemblyReference.cache
+D:\work\DP\redis\obj\Debug\netcoreapp2.2\redis.csproj.CoreCompileInputs.cache
+D:\work\DP\redis\obj\Debug\netcoreapp2.2\redis.AssemblyInfoInputs.cache
+D:\work\DP\redis\obj\Debug\netcoreapp2.2\redis.AssemblyInfo.cs

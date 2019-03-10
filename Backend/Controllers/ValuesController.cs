@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 using StackExchange.Redis;
 using System.Threading;
+using Redis;
 
 namespace Backend.Controllers
 {
@@ -30,8 +31,9 @@ namespace Backend.Controllers
                     isError = false;
                     break;
                 }
-                else
+                else {
                     Thread.Sleep(500);
+                }  
             }
 
             return isError ? "String contain unknown chars" : value;

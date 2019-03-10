@@ -231,23 +231,24 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Pipelines.Sockets.Unofficial/1.0.20": {
+      "Pipelines.Sockets.Unofficial/1.1.14": {
         "type": "package",
         "dependencies": {
           "System.Buffers": "4.4.0",
-          "System.IO.Pipelines": "4.5.1"
+          "System.IO.Pipelines": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
         },
         "compile": {
-          "lib/netcoreapp2.1/Pipelines.Sockets.Unofficial.dll": {}
+          "lib/netcoreapp2.2/Pipelines.Sockets.Unofficial.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.1/Pipelines.Sockets.Unofficial.dll": {}
+          "lib/netcoreapp2.2/Pipelines.Sockets.Unofficial.dll": {}
         }
       },
-      "StackExchange.Redis/2.0.545": {
+      "StackExchange.Redis/2.0.560": {
         "type": "package",
         "dependencies": {
-          "Pipelines.Sockets.Unofficial": "1.0.20",
+          "Pipelines.Sockets.Unofficial": "1.1.14",
           "System.Diagnostics.PerformanceCounter": "4.5.0",
           "System.IO.Pipelines": "4.5.1",
           "System.Threading.Channels": "4.5.0"
@@ -309,6 +310,15 @@
         },
         "runtime": {
           "lib/netcoreapp2.1/System.IO.Pipelines.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "System.Security.AccessControl/4.5.0": {
@@ -386,6 +396,19 @@
         },
         "runtime": {
           "lib/netcoreapp2.1/System.Threading.Channels.dll": {}
+        }
+      },
+      "redis/2.0.2": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "StackExchange.Redis": "2.0.560"
+        },
+        "compile": {
+          "bin/placeholder/redis.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/redis.dll": {}
         }
       }
     }
@@ -899,10 +922,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Pipelines.Sockets.Unofficial/1.0.20": {
-      "sha512": "Pv7AVIhifiIpbqBit/w/d9alzrFfI5ZlB/aTAeM/71ORW2kPnVNdxXX6r7b3/sHbd9szw9k0CDN7bve9BJPW3g==",
+    "Pipelines.Sockets.Unofficial/1.1.14": {
+      "sha512": "xAtutJLnWT/s00lofaU2/cCpmaz2Tkn/4Un4dNWaHQQAFTyihArQcsnGKwaUJV7eCz/kzfVZksO9tiLY3o10Lg==",
       "type": "package",
-      "path": "pipelines.sockets.unofficial/1.0.20",
+      "path": "pipelines.sockets.unofficial/1.1.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -912,16 +935,18 @@
         "lib/net472/Pipelines.Sockets.Unofficial.xml",
         "lib/netcoreapp2.1/Pipelines.Sockets.Unofficial.dll",
         "lib/netcoreapp2.1/Pipelines.Sockets.Unofficial.xml",
+        "lib/netcoreapp2.2/Pipelines.Sockets.Unofficial.dll",
+        "lib/netcoreapp2.2/Pipelines.Sockets.Unofficial.xml",
         "lib/netstandard2.0/Pipelines.Sockets.Unofficial.dll",
         "lib/netstandard2.0/Pipelines.Sockets.Unofficial.xml",
-        "pipelines.sockets.unofficial.1.0.20.nupkg.sha512",
+        "pipelines.sockets.unofficial.1.1.14.nupkg.sha512",
         "pipelines.sockets.unofficial.nuspec"
       ]
     },
-    "StackExchange.Redis/2.0.545": {
-      "sha512": "pYcxu2MYai8HJDfmhzX8oC261IuptR3JPv//0QINM1Rp9TZeeUlKskApyALhk261/X2b7G9yrECi1s2xCrSsVQ==",
+    "StackExchange.Redis/2.0.560": {
+      "sha512": "O36Uc0ThLwm+5JmvlxxYZvdYXru12foJqalJlT8/I0EbQdWUChEDTL61qpQT5PCfZ9LbKNx98YFuQL5/PXh1zA==",
       "type": "package",
-      "path": "stackexchange.redis/2.0.545",
+      "path": "stackexchange.redis/2.0.560",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -931,7 +956,7 @@
         "lib/net472/StackExchange.Redis.xml",
         "lib/netstandard2.0/StackExchange.Redis.dll",
         "lib/netstandard2.0/StackExchange.Redis.xml",
-        "stackexchange.redis.2.0.545.nupkg.sha512",
+        "stackexchange.redis.2.0.560.nupkg.sha512",
         "stackexchange.redis.nuspec"
       ]
     },
@@ -1033,6 +1058,31 @@
         "ref/netstandard1.3/System.IO.Pipelines.dll",
         "system.io.pipelines.4.5.1.nupkg.sha512",
         "system.io.pipelines.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "sha512": "hMkdWxksypQlFXB7JamQegDscxEAQO4FHd/lw/zlSZU9dZgAij65xjCrXer183wvoNAzJic5zzjj2oc9/dloWg==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -1204,12 +1254,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "redis/2.0.2": {
+      "type": "project",
+      "path": "../Redis/redis.csproj",
+      "msbuildProject": "../Redis/redis.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "StackExchange.Redis >= 2.0.545"
+      "redis >= 2.0.2"
     ]
   },
   "packageFolders": {
@@ -1217,7 +1272,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.2.1",
+    "version": "2.0.2",
     "restore": {
       "projectUniqueName": "D:\\work\\DP\\TextRankCalc\\textrankcalc.csproj",
       "projectName": "textrankcalc",
@@ -1239,7 +1294,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\work\\DP\\Redis\\redis.csproj": {
+              "projectPath": "D:\\work\\DP\\Redis\\redis.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1256,10 +1315,6 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
-          },
-          "StackExchange.Redis": {
-            "target": "Package",
-            "version": "[2.0.545, )"
           }
         },
         "imports": [

@@ -12,6 +12,8 @@ namespace Frontend.Controllers
 {
     public class HomeController : Controller
     {
+        private const string serverAddress = "http://localhost:5000";
+        
         public IActionResult Index()
         {
             return View();
@@ -27,7 +29,7 @@ namespace Frontend.Controllers
         public async Task<IActionResult> TextDetails(string id)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/api/values/{id}");
+            HttpResponseMessage response = await client.GetAsync($"{serverAddress}/api/values/{id}");
             string relation =  await response.Content.ReadAsStringAsync();
             ViewData["relation"] = relation;
 
@@ -50,7 +52,7 @@ namespace Frontend.Controllers
         private async Task<string> SendData(string data)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync("http://localhost:5000/api/values", data);
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{serverAddress}/api/values", data);
             return await response.Content.ReadAsStringAsync();
         }
     }
