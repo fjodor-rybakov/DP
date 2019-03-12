@@ -1,0 +1,14 @@
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\VowelConsCounter.deps.json
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\VowelConsCounter.runtimeconfig.json
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\VowelConsCounter.runtimeconfig.dev.json
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\VowelConsCounter.dll
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\VowelConsCounter.pdb
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\VowelConsCounter\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.csprojAssemblyReference.cache
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.csproj.CoreCompileInputs.cache
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.AssemblyInfoInputs.cache
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.AssemblyInfo.cs
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.csproj.CopyComplete
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.dll
+D:\work\DP\VowelConsCounter\obj\Debug\netcoreapp2.2\VowelConsCounter.pdb

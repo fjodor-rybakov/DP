@@ -36,7 +36,7 @@ namespace Backend.Controllers
                 }  
             }
 
-            return isError ? "String contain unknown chars" : value;
+            return value;
         }
 
         // POST api/values

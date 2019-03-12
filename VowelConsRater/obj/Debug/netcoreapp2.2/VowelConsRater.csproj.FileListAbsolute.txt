@@ -1,0 +1,14 @@
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.csprojAssemblyReference.cache
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.csproj.CoreCompileInputs.cache
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.AssemblyInfoInputs.cache
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.AssemblyInfo.cs
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\VowelConsRater.deps.json
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\VowelConsRater.runtimeconfig.json
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\VowelConsRater.runtimeconfig.dev.json
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\VowelConsRater.dll
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\VowelConsRater.pdb
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\VowelConsRater\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.csproj.CopyComplete
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.dll
+D:\work\DP\VowelConsRater\obj\Debug\netcoreapp2.2\VowelConsRater.pdb
