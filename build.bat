@@ -17,6 +17,8 @@ set path_text_rank_calc_publish=%path_text_rank_calc%\bin\Debug\netcoreapp2.2\pu
 set path_vowel_cons_counter_publish=%path_vowel_cons_counter%\bin\Debug\netcoreapp2.2\publish
 set path_vowel_cons_rater_publish=%path_vowel_cons_rater%\bin\Debug\netcoreapp2.2\publish
 
+set path_tools=%work_dir%\tools
+
 if defined version (
 	cd %path_frontend%
 	dotnet publish
@@ -65,23 +67,29 @@ if defined version (
 		xcopy %path_vowel_cons_rater_publish% /S
 		cd..
 		
-		echo port_frontend:5001 > config.txt
-		echo port_backend:5000 >> config.txt
-
-		echo start redis-server > run.bat
-		echo start dotnet Frontend\Frontend.dll >> run.bat
-		echo start dotnet Backend\Backend.dll >> run.bat
-		echo start dotnet TextListener\TextListener.dll >> run.bat
-		echo start dotnet TextRankCalc\TextRankCalc.dll >> run.bat
-		echo start dotnet VowelConsCounter\VowelConsCounter.dll >> run.bat
-		echo start dotnet VowelConsRater\VowelConsRater.dll >> run.bat
+		xcopy %path_tools% /S
 		
+		>config.txt (
+			echo port_frontend 5001
+			echo port_backend 5000
+			echo count_vowel_cons_counter 3
+			echo count_vowel_cons_rater 2
+		)
+		
+		>run.bat (
+			echo start redis-server
+			echo start dotnet Frontend\Frontend.dll
+			echo start dotnet Backend\Backend.dll
+			echo start dotnet TextListener\TextListener.dll
+			echo start run_vowel_counter_rater
+		)
+				
 		echo taskkill /IM dotnet.exe /F > stop.bat
 		echo taskkill /IM redis-server.exe /F >> stop.bat
 	) else (
 		cd..
 		echo This version already exists.
 	)
-) else ( 
+) else (
 	echo Version are required.
 )

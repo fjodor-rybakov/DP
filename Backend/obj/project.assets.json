@@ -5442,7 +5442,7 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "redis/3.0.3": {
+      "redis/3.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -14431,7 +14431,7 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "redis/3.0.3": {
+    "redis/3.0.0": {
       "type": "project",
       "path": "../Redis/redis.csproj",
       "msbuildProject": "../Redis/redis.csproj"
@@ -14441,7 +14441,7 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.AspNetCore.All >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "redis >= 3.0.3"
+      "redis >= 3.0.0"
     ]
   },
   "packageFolders": {
@@ -14449,7 +14449,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "3.0.3",
+    "version": "3.0.0",
     "restore": {
       "projectUniqueName": "D:\\work\\DP\\Backend\\Backend.csproj",
       "projectName": "Backend",

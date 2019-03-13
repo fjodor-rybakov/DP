@@ -6,9 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "VowelConsRater/3.0.3": {
+      "VowelConsRater/3.0.0": {
         "dependencies": {
-          "redis": "3.0.3"
+          "redis": "3.0.0"
         },
         "runtime": {
           "VowelConsRater.dll": {}
@@ -165,7 +165,7 @@
           }
         }
       },
-      "redis/3.0.3": {
+      "redis/3.0.0": {
         "dependencies": {
           "StackExchange.Redis": "2.0.560"
         },
@@ -176,7 +176,7 @@
     }
   },
   "libraries": {
-    "VowelConsRater/3.0.3": {
+    "VowelConsRater/3.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -272,7 +272,7 @@
       "path": "system.threading.channels/4.5.0",
       "hashPath": "system.threading.channels.4.5.0.nupkg.sha512"
     },
-    "redis/3.0.3": {
+    "redis/3.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

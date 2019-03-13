@@ -9,8 +9,8 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("TextListener")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("3.0.3.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("3.0.3")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("3.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("3.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("TextListener")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TextListener")]
-[assembly: System.Reflection.AssemblyVersionAttribute("3.0.3.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("3.0.0.0")]
