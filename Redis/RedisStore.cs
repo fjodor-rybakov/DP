@@ -6,7 +6,9 @@ namespace Redis
 {
     public class RedisStore
     {
-        private static readonly Lazy<ConnectionMultiplexer> LazyConnection;
+        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionRU;
+        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionEU;
+        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionUSA;
 
         static RedisStore()
         {
@@ -16,11 +18,35 @@ namespace Redis
                 EndPoints = { "localhost:6379" }
             };
 
-            LazyConnection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+            LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+
+            configurationOptions = new ConfigurationOptions
+            {
+                AbortOnConnectFail = false,
+                EndPoints = { "localhost:8001" }
+            };
+
+            LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+
+            configurationOptions = new ConfigurationOptions
+            {
+                AbortOnConnectFail = false,
+                EndPoints = { "localhost:8002" }
+            };
+
+            LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
         }
 
-        public static ConnectionMultiplexer Connection => LazyConnection.Value;
+        public static ConnectionMultiplexer ConnectionRU => LazyConnectionRU.Value;
 
-        public static IDatabase RedisCache => Connection.GetDatabase();
+        public static IDatabase RedisCacheRU => ConnectionRU.GetDatabase();
+
+        public static ConnectionMultiplexer ConnectionEU => LazyConnectionEU.Value;
+
+        public static IDatabase RedisCacheEU => ConnectionEU.GetDatabase();
+
+        public static ConnectionMultiplexer ConnectionUSA => LazyConnectionUSA.Value;
+
+        public static IDatabase RedisCacheUSA => ConnectionUSA.GetDatabase();
     }
 }

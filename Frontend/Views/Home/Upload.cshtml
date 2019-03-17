@@ -6,6 +6,11 @@
     @using(Html.BeginForm("Upload", "Home", FormMethod.Post))
     {
         <input name="data" type="text" required="required"/><br>
+        <select name="region">
+            <option value="rus">RUS</option>
+            <option value="eu">EU</option>
+            <option value="usa">USA</option>
+        </select>
         <input type="submit">
     }
 </div>

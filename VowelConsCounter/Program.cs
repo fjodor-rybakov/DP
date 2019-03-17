@@ -13,7 +13,7 @@ namespace VowelConsCounter
         const string RATE_QUEUE_NAME = "rate_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.RedisCache;
+            IDatabase db = RedisStore.RedisCacheRU;
             var sub = db.Multiplexer.GetSubscriber();
             sub.Subscribe(COUNTER_HINTS_CHANNEL, delegate
             {
@@ -42,16 +42,6 @@ namespace VowelConsCounter
             db.ListLeftPush(RATE_QUEUE_NAME, message, flags: CommandFlags.FireAndForget);
             // and notify consumers
             db.Multiplexer.GetSubscriber().Publish(RATE_HINTS_CHANNEL, "");
-        }
-
-        private static string BuildJobMessage(string data)
-        {
-            return $"JOB:{data}";
-        }
-
-        private static string ParseData(string msg)
-        {
-            return msg.Split(':')[1];
-        }
+        }       
     }
 }

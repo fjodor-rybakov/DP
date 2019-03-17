@@ -10,6 +10,11 @@ using Newtonsoft.Json;
 
 namespace Frontend.Controllers
 {
+    public struct UserData {
+        public string data;
+        public string region;
+    }
+
     public class HomeController : Controller
     {
         private const string serverAddress = "http://localhost:5000";
@@ -37,9 +42,11 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(string data)
+        public async Task<IActionResult> Upload(string data, string region)
         {
-            string id = await SendData(data);
+            Console.WriteLine(data);
+            Console.WriteLine(region);
+            string id = await SendData(data, region);
 
             return Redirect("TextDetails/" + id);
         }
@@ -49,10 +56,15 @@ namespace Frontend.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task<string> SendData(string data)
+        private async Task<string> SendData(string data, string region)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync($"{serverAddress}/api/values", data);
+            UserData userData = new UserData();
+            userData.data = data;
+            userData.region = region;
+            string output = JsonConvert.SerializeObject(userData);
+
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{serverAddress}/api/values", output);
             return await response.Content.ReadAsStringAsync();
         }
     }

@@ -67,25 +67,9 @@ if defined version (
 		xcopy %path_vowel_cons_rater_publish% /S
 		cd..
 		
-		xcopy %path_tools% /S
-		
-		>config.txt (
-			echo port_frontend 5001
-			echo port_backend 5000
-			echo count_vowel_cons_counter 3
-			echo count_vowel_cons_rater 2
-		)
-		
-		>run.bat (
-			echo start redis-server
-			echo start dotnet Frontend\Frontend.dll
-			echo start dotnet Backend\Backend.dll
-			echo start dotnet TextListener\TextListener.dll
-			echo start run_vowel_counter_rater
-		)
-				
-		echo taskkill /IM dotnet.exe /F > stop.bat
-		echo taskkill /IM redis-server.exe /F >> stop.bat
+		xcopy %work_dir%\run.bat %work_dir%\build\%version%
+		xcopy %work_dir%\stop.bat %work_dir%\build\%version%
+		xcopy %work_dir%\config.txt %work_dir%\build\%version%
 	) else (
 		cd..
 		echo This version already exists.
