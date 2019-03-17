@@ -6,10 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 using StackExchange.Redis;
 using System.Threading;
+using Newtonsoft.Json;
 using Redis;
 
 namespace Backend.Controllers
 {
+    public struct UserData {
+        public string data;
+        public string region;
+    }
+
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -20,7 +26,7 @@ namespace Backend.Controllers
         public string Get(string id)
         {
             string value = null;
-            var db = RedisStore.RedisCache;
+            var db = RedisStore.RedisCacheRU;
             bool isError = true;
 
             for (int i = 0; i < 3; i++)
@@ -45,12 +51,13 @@ namespace Backend.Controllers
 
         // POST api/values
         [HttpPost]
-        public string Post([FromBody]string value)
+        public string Post([FromBody]string json)
         {
             var id = Guid.NewGuid().ToString();
-            _data[id] = value;
-            var db = RedisStore.RedisCache;
-            db.StringSet(id, value);
+            UserData userData = JsonConvert.DeserializeObject<UserData>(json);
+            _data[id] = userData.data;
+            var db = RedisStore.RedisCacheRU;
+            db.StringSet(id, userData.data);
             var pub = db.Multiplexer.GetSubscriber();
             pub.Publish("events", id);
 
