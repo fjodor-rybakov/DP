@@ -12,29 +12,29 @@ namespace Redis
 
         static RedisStore()
         {
-            var configurationOptions = new ConfigurationOptions
+            var configurationOptionsRU = new ConfigurationOptions
             {
                 AbortOnConnectFail = false,
                 EndPoints = { "localhost:6379" }
             };
 
-            LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+            LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
 
-            configurationOptions = new ConfigurationOptions
+            var configurationOptionsEU = new ConfigurationOptions
             {
                 AbortOnConnectFail = false,
                 EndPoints = { "localhost:8001" }
             };
 
-            LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+            LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsEU));
 
-            configurationOptions = new ConfigurationOptions
+            var configurationOptionsUSA = new ConfigurationOptions
             {
                 AbortOnConnectFail = false,
                 EndPoints = { "localhost:8002" }
             };
 
-            LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptions));
+            LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
         }
 
         public static ConnectionMultiplexer ConnectionRU => LazyConnectionRU.Value;
