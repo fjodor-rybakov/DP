@@ -14461,11 +14461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\work\\DP\\backend\\Backend.csproj",
+      "projectUniqueName": "D:\\work\\DP\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "D:\\work\\DP\\backend\\Backend.csproj",
+      "projectPath": "D:\\work\\DP\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\fedor\\.nuget\\packages\\",
-      "outputPath": "D:\\work\\DP\\backend\\obj\\",
+      "outputPath": "D:\\work\\DP\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

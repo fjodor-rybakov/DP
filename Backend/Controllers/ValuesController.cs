@@ -26,7 +26,7 @@ namespace Backend.Controllers
         public string Get(string id)
         {
             string value = null;
-            var db = RedisStore.RedisCacheRU;
+            var db = RedisStore.RedisCache();
             bool isError = true;
 
             for (int i = 0; i < 3; i++)
@@ -56,7 +56,9 @@ namespace Backend.Controllers
             var id = Guid.NewGuid().ToString();
             UserData userData = JsonConvert.DeserializeObject<UserData>(json);
             _data[id] = userData.data;
-            var db = RedisStore.RedisCacheRU;
+            RedisStore.Region = userData.region;
+            Console.WriteLine(RedisStore.Region);
+            var db = RedisStore.RedisCache();
             db.StringSet(id, userData.data);
             var pub = db.Multiplexer.GetSubscriber();
             pub.Publish("events", id);

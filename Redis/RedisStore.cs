@@ -4,11 +4,12 @@ using System.Configuration;
 
 namespace Redis
 {
-    public class RedisStore
+    public static class RedisStore
     {
         private static readonly Lazy<ConnectionMultiplexer> LazyConnectionRU;
         private static readonly Lazy<ConnectionMultiplexer> LazyConnectionEU;
         private static readonly Lazy<ConnectionMultiplexer> LazyConnectionUSA;
+        public static string Region { get; set; }
 
         static RedisStore()
         {
@@ -37,16 +38,31 @@ namespace Redis
             LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
         }
 
-        public static ConnectionMultiplexer ConnectionRU => LazyConnectionRU.Value;
+        public static IDatabase RedisCache() {
+            Console.WriteLine("Region: " + RedisStore.Region);
+            switch(RedisStore.Region)
+            {
+                case "rus": 
+                    return ConnectionRU.GetDatabase();
+                case "eu": 
+                    return ConnectionEU.GetDatabase();
+                case "usa": 
+                    return ConnectionUSA.GetDatabase();
+                default: 
+                    return ConnectionRU.GetDatabase();
+            }
+        }
 
-        public static IDatabase RedisCacheRU => ConnectionRU.GetDatabase();
+        private static ConnectionMultiplexer ConnectionRU => LazyConnectionRU.Value;
 
-        public static ConnectionMultiplexer ConnectionEU => LazyConnectionEU.Value;
+        private static IDatabase RedisCacheRU => ConnectionRU.GetDatabase();
 
-        public static IDatabase RedisCacheEU => ConnectionEU.GetDatabase();
+        private static ConnectionMultiplexer ConnectionEU => LazyConnectionEU.Value;
 
-        public static ConnectionMultiplexer ConnectionUSA => LazyConnectionUSA.Value;
+        private static IDatabase RedisCacheEU => ConnectionEU.GetDatabase();
 
-        public static IDatabase RedisCacheUSA => ConnectionUSA.GetDatabase();
+        private static ConnectionMultiplexer ConnectionUSA => LazyConnectionUSA.Value;
+
+        private static IDatabase RedisCacheUSA => ConnectionUSA.GetDatabase();
     }
 }
