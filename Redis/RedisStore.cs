@@ -4,14 +4,28 @@ using System.Configuration;
 
 namespace Redis
 {
-    public static class RedisStore
+    public class RedisStore
     {
-        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionRU;
-        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionEU;
-        private static readonly Lazy<ConnectionMultiplexer> LazyConnectionUSA;
+        private static Lazy<ConnectionMultiplexer> LazyConnectionRU;
+        private static Lazy<ConnectionMultiplexer> LazyConnectionEU;
+        private static Lazy<ConnectionMultiplexer> LazyConnectionUSA;
         public static string Region { get; set; }
+        private static RedisStore _instance = null; 
 
-        static RedisStore()
+        public static RedisStore getInstance()
+        {
+            if (_instance == null) 
+            {
+                _instance = new RedisStore();
+                setInstance();
+            }
+
+            return _instance;
+        }
+
+        private RedisStore() {}
+
+        private static void setInstance()
         {
             var configurationOptionsRU = new ConfigurationOptions
             {
@@ -19,7 +33,7 @@ namespace Redis
                 EndPoints = { "localhost:6379" }
             };
 
-            LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
+            RedisStore.LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
 
             var configurationOptionsEU = new ConfigurationOptions
             {
@@ -27,7 +41,7 @@ namespace Redis
                 EndPoints = { "localhost:8001" }
             };
 
-            LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsEU));
+            RedisStore.LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsEU));
 
             var configurationOptionsUSA = new ConfigurationOptions
             {
@@ -35,10 +49,10 @@ namespace Redis
                 EndPoints = { "localhost:8002" }
             };
 
-            LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
+            RedisStore.LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
         }
 
-        public static IDatabase RedisCache() {
+        public IDatabase RedisCache() {
             Console.WriteLine("Region: " + RedisStore.Region);
             switch(RedisStore.Region)
             {

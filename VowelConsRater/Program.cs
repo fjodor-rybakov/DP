@@ -10,7 +10,7 @@ namespace VowelConsRater
         const string RATE_QUEUE_NAME = "rate_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.RedisCache();
+            IDatabase db = RedisStore.getInstance().RedisCache();
             var sub = db.Multiplexer.GetSubscriber();
             sub.Subscribe(RATE_HINTS_CHANNEL, delegate
             {

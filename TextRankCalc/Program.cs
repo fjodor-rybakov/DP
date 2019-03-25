@@ -10,7 +10,7 @@ namespace TextRankCalc
         const string COUNTER_QUEUE_NAME = "counter_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.RedisCache();
+            IDatabase db = RedisStore.getInstance().RedisCache();
             var sub = db.Multiplexer.GetSubscriber();
             sub.Subscribe("events", (channel, message) =>
             {
