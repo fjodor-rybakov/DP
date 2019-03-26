@@ -2,9 +2,21 @@
 using Redis;
 using StackExchange.Redis;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace VowelConsCounter
 {
+    public class UserData {
+        public string id;
+        public string message;
+        public string region;
+    }
+
+    public class UserDataCounter : UserData {
+        public int countGlasn;
+        public int countSoglasn;
+    }
+
     class Program
     {
         const string COUNTER_HINTS_CHANNEL = "counter_hints";
@@ -13,21 +25,24 @@ namespace VowelConsCounter
         const string RATE_QUEUE_NAME = "rate_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.getInstance().RedisCache();
+            IDatabase db = RedisStore.getInstance().RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
+
             sub.Subscribe(COUNTER_HINTS_CHANNEL, delegate
             {
                 // process all messages in queue
                 string msg = db.ListRightPop(COUNTER_QUEUE_NAME);
                 while (msg != null)
                 {
-                    string id = msg.Split(':')[0];
-                    string str = msg.Split(':')[1];
-                    Console.WriteLine(msg);
-                    int countGlasn = Regex.Matches(str, @"[aiueoy]", RegexOptions.IgnoreCase).Count;
-                    int countSoglasn = Regex.Matches(str, @"[bcdfghjklmnpqrstvwxz]", RegexOptions.IgnoreCase).Count;
+                    UserData userData = JsonConvert.DeserializeObject<UserData>(msg);
+                    Console.WriteLine("Region: " + userData.region + " message: " + msg);
 
-                    SendMessage($"{id}:{countGlasn}:{countSoglasn}", db);
+                    int countGlasn = Regex.Matches(userData.message, @"[aiueoy]", RegexOptions.IgnoreCase).Count;
+                    int countSoglasn = Regex.Matches(userData.message, @"[bcdfghjklmnpqrstvwxz]", RegexOptions.IgnoreCase).Count;
+                    string message = getStrigifyUserDataCounter(userData, countGlasn, countSoglasn);
+                    Console.WriteLine("Queue value: " + message);
+
+                    SendMessage(message, db);
 
                     msg = db.ListRightPop(COUNTER_QUEUE_NAME);
                 }
@@ -42,6 +57,17 @@ namespace VowelConsCounter
             db.ListLeftPush(RATE_QUEUE_NAME, message, flags: CommandFlags.FireAndForget);
             // and notify consumers
             db.Multiplexer.GetSubscriber().Publish(RATE_HINTS_CHANNEL, "");
-        }       
+        }      
+
+        private static string getStrigifyUserDataCounter(UserData userData, int countGlasn, int countSoglasn) {
+            UserDataCounter userDataCounter = new UserDataCounter();
+            userDataCounter.id = userData.id;
+            userDataCounter.region = userData.region;
+            userDataCounter.message = userData.message;
+            userDataCounter.countGlasn = countGlasn;
+            userDataCounter.countSoglasn = countSoglasn;
+
+            return JsonConvert.SerializeObject(userDataCounter);
+        } 
     }
 }

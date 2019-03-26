@@ -4,6 +4,7 @@ set current_dir=%cd%
 cd /D C:\Program Files\Redis
 start redis-server conf\redis_8001.conf
 start redis-server conf\redis_8002.conf
+start redis-server conf\redis_8003.conf
 cd /D %current_dir%
 start dotnet Frontend\Frontend.dll
 start dotnet Backend\Backend.dll

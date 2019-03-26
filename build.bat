@@ -77,3 +77,6 @@ if defined version (
 ) else (
 	echo Version are required.
 )
+
+cd..
+cd..

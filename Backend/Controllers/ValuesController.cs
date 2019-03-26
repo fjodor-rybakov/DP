@@ -11,22 +11,26 @@ using Redis;
 
 namespace Backend.Controllers
 {
-    public struct UserData {
-        public string data;
+    public class UserDataRegion {
+        public string message;
         public string region;
+    }
+
+    public class UserData : UserDataRegion {
+        public string id;
     }
 
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        static readonly ConcurrentDictionary<string, string> _data = new ConcurrentDictionary<string, string>();
+        private static string _region = "";
 
         // GET api/values/<id>
         [HttpGet("{id}")]
         public string Get(string id)
         {
             string value = null;
-            var db = RedisStore.getInstance().RedisCache();
+            var db = RedisStore.getInstance().RedisCache(ValuesController._region);
             bool isError = true;
 
             for (int i = 0; i < 3; i++)
@@ -54,16 +58,27 @@ namespace Backend.Controllers
         public string Post([FromBody]string json)
         {
             var id = Guid.NewGuid().ToString();
-            UserData userData = JsonConvert.DeserializeObject<UserData>(json);
-            _data[id] = userData.data;
-            RedisStore.Region = userData.region;
-            Console.WriteLine(RedisStore.Region);
-            var db = RedisStore.getInstance().RedisCache();
-            db.StringSet(id, userData.data);
+            UserDataRegion userDataRegion = JsonConvert.DeserializeObject<UserDataRegion>(json);
+            string contextId = userDataRegion.region;
+            Console.WriteLine("Region: " + contextId);
+
+            var db = RedisStore.getInstance().RedisCacheTable;
+            db.StringSet(contextId, getStrigifyUserData(userDataRegion, id));
+            ValuesController._region = contextId;
+
             var pub = db.Multiplexer.GetSubscriber();
-            pub.Publish("events", id);
+            pub.Publish("events", contextId);
 
             return id;
+        }
+
+        private string getStrigifyUserData(UserDataRegion userDataRegion, string id) {
+            UserData userData = new UserData();
+            userData.id = id;
+            userData.region = userDataRegion.region;
+            userData.message = userDataRegion.message;
+
+            return JsonConvert.SerializeObject(userData);
         }
     }
 }

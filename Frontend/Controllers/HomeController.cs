@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Frontend.Controllers
 {
     public struct UserData {
-        public string data;
+        public string message;
         public string region;
     }
 
@@ -42,11 +42,11 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(string data, string region)
+        public async Task<IActionResult> Upload(string message, string region)
         {
-            Console.WriteLine(data);
+            Console.WriteLine(message);
             Console.WriteLine(region);
-            string id = await SendData(data, region);
+            string id = await SendData(message, region);
 
             return Redirect("TextDetails/" + id);
         }
@@ -56,11 +56,11 @@ namespace Frontend.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task<string> SendData(string data, string region)
+        private async Task<string> SendData(string message, string region)
         {
             HttpClient client = new HttpClient();
             UserData userData = new UserData();
-            userData.data = data;
+            userData.message = message;
             userData.region = region;
             string output = JsonConvert.SerializeObject(userData);
 

@@ -10,21 +10,22 @@ namespace TextRankCalc
         const string COUNTER_QUEUE_NAME = "counter_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.getInstance().RedisCache();
+            IDatabase db = RedisStore.getInstance().RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
+            
             sub.Subscribe("events", (channel, message) =>
             {
-                string id = (string)message;
-                Console.WriteLine("TextCreated: " + id);
-                string value = db.StringGet(id);
-                Console.WriteLine($"{id}:{value}");
-                SendMessage($"{id}:{value}", db);
+                string contextId = (string)message;
+                string value = db.StringGet(contextId);
+                Console.WriteLine("Region: " + contextId + " message: " + value);
+                
+                SendMessage(value, db);
             });
             Console.WriteLine("Obsevable subscribe text rank calc is ready. For exit press Enter.");
             Console.ReadLine();
         }
 
-        private static void SendMessage(string message, IDatabase db )
+        private static void SendMessage(string message, IDatabase db)
         {
             // put message to queue
             db.ListLeftPush( COUNTER_QUEUE_NAME, message, flags: CommandFlags.FireAndForget );

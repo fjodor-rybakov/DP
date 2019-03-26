@@ -1,17 +1,30 @@
 ﻿using System;
 using StackExchange.Redis;
+using Newtonsoft.Json;
 using Redis;
 
 namespace VowelConsRater
 {
+    public class UserData {
+        public string id;
+        public string message;
+        public string region;
+    }
+
+    public class UserDataCounter : UserData {
+        public int countGlasn;
+        public int countSoglasn;
+    }
     class Program
     {
         const string RATE_HINTS_CHANNEL = "rate_hints";
         const string RATE_QUEUE_NAME = "rate_queue";
         static void Main(string[] args)
         {
-            IDatabase db = RedisStore.getInstance().RedisCache();
+            RedisStore instance = RedisStore.getInstance();
+            IDatabase db = instance.RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
+
             sub.Subscribe(RATE_HINTS_CHANNEL, delegate
             {
                 // process all messages in queue
@@ -19,12 +32,12 @@ namespace VowelConsRater
                 while (msg != null)
                 {
                     Console.WriteLine(msg);
-                    string id = msg.Split(':')[0];
-                    double countGlasn = Convert.ToDouble(msg.Split(':')[1]);
-                    double countSoglasn = Convert.ToDouble(msg.Split(':')[2]);
-                    double relation = countSoglasn == 0 ? 0 : countGlasn / countSoglasn;
+                    UserDataCounter userDataCounter = JsonConvert.DeserializeObject<UserDataCounter>(msg);
 
-                    db.StringSet($"RANK_{id}", relation);
+                    double relation = userDataCounter.countSoglasn == 0 ? 
+                    0 : (double)userDataCounter.countGlasn / (double)userDataCounter.countSoglasn;
+
+                    instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", relation);
 
                     msg = db.ListRightPop(RATE_QUEUE_NAME);
                 }
