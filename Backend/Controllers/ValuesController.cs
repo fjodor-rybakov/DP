@@ -46,6 +46,8 @@ namespace Backend.Controllers
                 }  
             }
 
+            Console.WriteLine(value);
+
             if (isError) {
                 Console.WriteLine("Произошла ошибка");
             }

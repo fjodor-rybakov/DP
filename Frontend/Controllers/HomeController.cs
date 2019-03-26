@@ -10,7 +10,14 @@ using Newtonsoft.Json;
 
 namespace Frontend.Controllers
 {
-    public struct UserData {
+    public class UserData : UserDataRegion {
+        public string id;
+    }
+
+    public class UserDataRater : UserData {
+        public double relation;
+    }
+    public class UserDataRegion {
         public string message;
         public string region;
     }
@@ -35,8 +42,12 @@ namespace Frontend.Controllers
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync($"{serverAddress}/api/values/{id}");
-            string relation =  await response.Content.ReadAsStringAsync();
-            ViewData["relation"] = relation;
+            string json = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(json);
+            UserDataRater userDataRater = JsonConvert.DeserializeObject<UserDataRater>(json);
+            
+            ViewData["relation"] = userDataRater.relation;
+            ViewData["region"] = userDataRater.region;
 
             return View();
         }
@@ -59,7 +70,7 @@ namespace Frontend.Controllers
         private async Task<string> SendData(string message, string region)
         {
             HttpClient client = new HttpClient();
-            UserData userData = new UserData();
+            UserDataRegion userData = new UserDataRegion();
             userData.message = message;
             userData.region = region;
             string output = JsonConvert.SerializeObject(userData);

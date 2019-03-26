@@ -11,6 +11,10 @@ namespace VowelConsRater
         public string region;
     }
 
+    public class UserDataRater : UserData {
+        public double relation;
+    }
+
     public class UserDataCounter : UserData {
         public int countGlasn;
         public int countSoglasn;
@@ -36,8 +40,9 @@ namespace VowelConsRater
 
                     double relation = userDataCounter.countSoglasn == 0 ? 
                     0 : (double)userDataCounter.countGlasn / (double)userDataCounter.countSoglasn;
+                    string message = getStrigifyUserDataRater(userDataCounter, relation);
 
-                    instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", relation);
+                    instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", message);
 
                     msg = db.ListRightPop(RATE_QUEUE_NAME);
                 }
@@ -45,5 +50,15 @@ namespace VowelConsRater
             Console.WriteLine("Obsevable subscribe vowel cons rater is ready. For exit press Enter.");
             Console.ReadLine();
         }
+
+        private static string getStrigifyUserDataRater(UserDataCounter userDataCounter, double relation) {
+            UserDataRater userDataReter = new UserDataRater();
+            userDataReter.id = userDataCounter.id;
+            userDataReter.region = userDataCounter.region;
+            userDataReter.message = userDataCounter.message;
+            userDataReter.relation = relation;
+
+            return JsonConvert.SerializeObject(userDataReter);
+        } 
     }
 }
