@@ -25,6 +25,29 @@ namespace Redis
 
         private RedisStore() {}
 
+        public static string SeatchValueById(string id) {
+            var dbrus = ConnectionRU.GetDatabase();
+            var dbeu = ConnectionEU.GetDatabase();
+            var dbusa = ConnectionUSA.GetDatabase();
+
+            if (dbrus.KeyExists(id)) {
+                Console.WriteLine("!!!dbrus");
+                return dbrus.StringGet(id);
+            }
+
+            if (dbeu.KeyExists(id)) {
+                Console.WriteLine("!!!dbeu");
+                return dbeu.StringGet(id);
+            }
+
+            if (dbusa.KeyExists(id)) {
+                Console.WriteLine("!!!dbusa");
+                return dbusa.StringGet(id);
+            }
+
+            return null;
+        }
+
         private static void setSettings()
         {
             var configurationOptionsTable = new ConfigurationOptions

@@ -23,21 +23,19 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private static string _region = "";
 
         // GET api/values/<id>
         [HttpGet("{id}")]
         public string Get(string id)
         {
             string value = null;
-            var db = RedisStore.getInstance().RedisCache(ValuesController._region);
             bool isError = true;
 
             for (int i = 0; i < 3; i++)
             {
-                if (db.KeyExists($"RANK_{id}"))
+                value = RedisStore.SeatchValueById($"RANK_{id}");
+                if (value != null)
                 {
-                    value = db.StringGet($"RANK_{id}");
                     isError = false;
                     break;
                 }
@@ -66,7 +64,6 @@ namespace Backend.Controllers
 
             var db = RedisStore.getInstance().RedisCacheTable;
             db.StringSet(contextId, getStrigifyUserData(userDataRegion, id));
-            ValuesController._region = contextId;
 
             var pub = db.Multiplexer.GetSubscriber();
             pub.Publish("events", contextId);
