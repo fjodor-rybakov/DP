@@ -31,17 +31,14 @@ namespace Redis
             var dbusa = ConnectionUSA.GetDatabase();
 
             if (dbrus.KeyExists(id)) {
-                Console.WriteLine("!!!dbrus");
                 return dbrus.StringGet(id);
             }
 
             if (dbeu.KeyExists(id)) {
-                Console.WriteLine("!!!dbeu");
                 return dbeu.StringGet(id);
             }
 
             if (dbusa.KeyExists(id)) {
-                Console.WriteLine("!!!dbusa");
                 return dbusa.StringGet(id);
             }
 
