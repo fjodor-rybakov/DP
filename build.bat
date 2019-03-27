@@ -17,8 +17,6 @@ set path_text_rank_calc_publish=%path_text_rank_calc%\bin\Debug\netcoreapp2.2\pu
 set path_vowel_cons_counter_publish=%path_vowel_cons_counter%\bin\Debug\netcoreapp2.2\publish
 set path_vowel_cons_rater_publish=%path_vowel_cons_rater%\bin\Debug\netcoreapp2.2\publish
 
-set path_tools=%work_dir%\tools
-
 if defined version (
 	cd %path_frontend%
 	dotnet publish

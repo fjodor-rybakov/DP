@@ -6,22 +6,22 @@ start redis-server conf\redis_8001.conf
 start redis-server conf\redis_8002.conf
 start redis-server conf\redis_8003.conf
 cd /D %current_dir%
-start dotnet Frontend\Frontend.dll
-start dotnet Backend\Backend.dll
-start dotnet TextListener\TextListener.dll
-start dotnet TextRankCalc\TextRankCalc.dll
+start "Frontend" dotnet Frontend\Frontend.dll
+start "Backend" dotnet Backend\Backend.dll
+start "TextListener" dotnet TextListener\TextListener.dll
+start "TextRankCalc" dotnet TextRankCalc\TextRankCalc.dll
 setlocal enabledelayedexpansion
 set cnt=0
 for /f "usebackq tokens=1*" %%a in ("config.txt") do (
 	set "a=%%a"& set "b=%%b"
 	if !cnt!==2 (
 		for /l %%n in (1,1,!b!) do (
-			start dotnet VowelConsCounter\VowelConsCounter.dll
+			start "VowelConsCounter" dotnet VowelConsCounter\VowelConsCounter.dll
 		)
 	)
 	if !cnt!==3 (
 		for /l %%n in (1,1,!b!) do (
-			start dotnet VowelConsRater\VowelConsRater.dll
+			start "VowelConsRater" dotnet VowelConsRater\VowelConsRater.dll
 		)
 	)
 	set /a cnt+=1

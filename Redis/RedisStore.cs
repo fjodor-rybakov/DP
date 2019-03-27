@@ -1,6 +1,7 @@
 using StackExchange.Redis;
 using System;
 using System.Configuration;
+using System.Collections.Concurrent;
 
 namespace Redis
 {
@@ -11,6 +12,7 @@ namespace Redis
         private static Lazy<ConnectionMultiplexer> LazyConnectionEU;
         private static Lazy<ConnectionMultiplexer> LazyConnectionUSA;
         private static RedisStore _instance = null; 
+        private static readonly ConcurrentDictionary<string, string> _data = new ConcurrentDictionary<string, string>();
 
         public static RedisStore getInstance()
         {
@@ -25,20 +27,28 @@ namespace Redis
 
         private RedisStore() {}
 
-        public static string SeatchValueById(string id) {
+        public void addValue(string key, string value) {
+            _data[key] = value;
+        }
+
+        public string getValue(string key) {
+            return _data[key];
+        }
+
+        public static string SearchValueById(string id, string region) {
             var dbrus = ConnectionRU.GetDatabase();
             var dbeu = ConnectionEU.GetDatabase();
             var dbusa = ConnectionUSA.GetDatabase();
 
-            if (dbrus.KeyExists(id)) {
+            if (region == "rus" && dbrus.KeyExists(id)) {
                 return dbrus.StringGet(id);
             }
 
-            if (dbeu.KeyExists(id)) {
+            if (region == "eu" && dbeu.KeyExists(id)) {
                 return dbeu.StringGet(id);
             }
 
-            if (dbusa.KeyExists(id)) {
+            if (region == "usa" && dbusa.KeyExists(id)) {
                 return dbusa.StringGet(id);
             }
 
@@ -80,9 +90,9 @@ namespace Redis
             RedisStore.LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
         }
 
-        public IDatabase RedisCache(string contextId) {
-            Console.WriteLine("Region: " + contextId);
-            switch(contextId)
+        public IDatabase RedisCache(string region) {
+            Console.WriteLine("Region: " + region);
+            switch(region)
             {
                 case "rus": 
                     return ConnectionRU.GetDatabase();
