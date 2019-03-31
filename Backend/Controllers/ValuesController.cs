@@ -66,10 +66,8 @@ namespace Backend.Controllers
             var instance = RedisStore.getInstance();
 
             var db = instance.RedisCacheTable;
-            db.StringSet(contextId, getStrigifyUserData(userDataRegion, id));
-
             var pub = db.Multiplexer.GetSubscriber();
-            pub.Publish("events", contextId);
+            pub.Publish("events", getStrigifyUserData(userDataRegion, id));
 
             instance.addValue($"RANK_{id}", contextId);
 

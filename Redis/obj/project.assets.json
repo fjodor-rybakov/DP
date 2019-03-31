@@ -573,7 +573,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.8",
+    "version": "1.0.4",
     "restore": {
       "projectUniqueName": "D:\\work\\DP\\Redis\\redis.csproj",
       "projectName": "redis",

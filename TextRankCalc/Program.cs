@@ -15,9 +15,8 @@ namespace TextRankCalc
             
             sub.Subscribe("events", (channel, message) =>
             {
-                string contextId = (string)message;
-                string value = db.StringGet(contextId);
-                Console.WriteLine("Region: " + contextId + " message: " + value);
+                string value = (string)message;
+                Console.WriteLine("Message: " + value);
                 
                 SendMessage(value, db);
             });
