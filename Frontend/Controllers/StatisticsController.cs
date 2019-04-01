@@ -28,13 +28,14 @@ namespace Frontend.Controllers
             Console.WriteLine(json);
             TextStatistic textStatistic = JsonConvert.DeserializeObject<TextStatistic>(json);
             
-            Console.WriteLine("textNum: " + textStatistic.textNum + 
-                              ", highRankPart: " + textStatistic.highRankPart + 
-                              ", avgRank: " + textStatistic.avgRank);
-            
             ViewData["textNum"] = textStatistic.textNum;
             ViewData["highRankPart"] = textStatistic.highRankPart;
             ViewData["avgRank"] = textStatistic.avgRank;
+
+            Console.WriteLine("textNum: " + ViewData["textNum"] +
+                              ", highRankPart: " + ViewData["highRankPart"] +
+                              ", avgRank: " + ViewData["avgRank"]);
+
             
             return View();
         }
