@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,12 +38,16 @@ namespace Frontend
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
-                    name: "text",
-                    template: "{controller=Home}/{action=TextDetails}/{id?}");
+                    "text",
+                    "{controller=Home}/{action=TextDetails}/{id?}");
+
+                routes.MapRoute(
+                    "info",
+                    "{controller=StatisticsController}/{action=TextStatistic}");
             });
         }
     }

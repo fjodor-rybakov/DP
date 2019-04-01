@@ -20,6 +20,7 @@ namespace TextRankCalc
                 
                 SendMessage(value, db);
             });
+            
             Console.WriteLine("Observable subscribe text rank calc is ready. For exit press Enter.");
             Console.ReadLine();
         }

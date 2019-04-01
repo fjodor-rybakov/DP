@@ -10,6 +10,7 @@ start "Frontend" dotnet Frontend\Frontend.dll
 start "Backend" dotnet Backend\Backend.dll
 start "TextListener" dotnet TextListener\TextListener.dll
 start "TextRankCalc" dotnet TextRankCalc\TextRankCalc.dll
+start "TextStatistics" dotnet TextStatistics\TextStatistics.dll
 setlocal enabledelayedexpansion
 set cnt=0
 for /f "usebackq tokens=1*" %%a in ("config.txt") do (

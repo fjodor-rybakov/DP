@@ -19,10 +19,18 @@ namespace VowelConsRater
         public int countGlasn;
         public int countSoglasn;
     }
+
+    public class TextStatisticConsRater
+    {
+        public string contextId;
+        public double rank;
+    }
+    
     class Program
     {
         private const string RATE_HINTS_CHANNEL = "rate_hints";
         private const string RATE_QUEUE_NAME = "rate_queue";
+        private const string CHANNEL_RANK_CALCULATED = "TextRankCalculated";
         static void Main()
         {
             RedisStore instance = RedisStore.getInstance();
@@ -40,18 +48,22 @@ namespace VowelConsRater
 
                     double relation = userDataCounter.countSoglasn == 0 ? 
                     0 : (double)userDataCounter.countGlasn / (double)userDataCounter.countSoglasn;
-                    string message = getStringifyUserDataRater(userDataCounter, relation);
+                    string message = GetStringifyUserDataRater(userDataCounter, relation);
 
                     instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", message);
 
                     msg = db.ListRightPop(RATE_QUEUE_NAME);
+                    
+                    Console.WriteLine(GetStringifyTextStatisticConsRater(userDataCounter.id, relation));
+
+                    sub.Publish(CHANNEL_RANK_CALCULATED, GetStringifyTextStatisticConsRater(userDataCounter.id, relation));
                 }
             });
             Console.WriteLine("Observable subscribe vowel cons rater is ready. For exit press Enter.");
             Console.ReadLine();
         }
 
-        private static string getStringifyUserDataRater(UserDataCounter userDataCounter, double relation) {
+        private static string GetStringifyUserDataRater(UserDataCounter userDataCounter, double relation) {
             UserDataRater userDataRater = new UserDataRater
             {
                 id = userDataCounter.id,
@@ -61,6 +73,16 @@ namespace VowelConsRater
             };
 
             return JsonConvert.SerializeObject(userDataRater);
-        } 
+        }
+        
+        private static string GetStringifyTextStatisticConsRater(string contextId, double rank) {
+            TextStatisticConsRater textStatisticConsRater = new TextStatisticConsRater
+            {
+                contextId = contextId, 
+                rank = rank
+            };
+
+            return JsonConvert.SerializeObject(textStatisticConsRater);
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\work\\DP\\backend\\Backend.csproj",
+    "projectUniqueName": "D:\\work\\DP\\Backend\\Backend.csproj",
     "projectName": "Backend",
-    "projectPath": "D:\\work\\DP\\backend\\Backend.csproj",
-    "outputPath": "D:\\work\\DP\\backend\\obj\\",
+    "projectPath": "D:\\work\\DP\\Backend\\Backend.csproj",
+    "outputPath": "D:\\work\\DP\\Backend\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

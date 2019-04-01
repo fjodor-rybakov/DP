@@ -42,7 +42,37 @@ namespace Backend.Controllers
 
             Console.WriteLine(value);
 
-            if (isError) {
+            if (isError)
+            {
+                Console.WriteLine("Произошла ошибка");
+            }
+
+            return value;
+        }
+
+        // GET api/values
+        [HttpGet]
+        public string GetTextStatistic()
+        {
+            var instance = RedisStore.getInstance();
+            var db = instance.RedisCacheTable;
+            bool isError = true;
+            string value = null;
+            
+            for (int i = 0; i < 3; i++)
+            {
+                value = db.StringGet("text_statistic");
+                if (value != null)
+                {
+                    isError = false;
+                    break;
+                }
+
+                Thread.Sleep(500);
+            }
+            
+            if (isError)
+            {
                 Console.WriteLine("Произошла ошибка");
             }
 

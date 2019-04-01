@@ -1,0 +1,14 @@
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\TextStatistics.deps.json
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\TextStatistics.runtimeconfig.json
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\TextStatistics.runtimeconfig.dev.json
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\TextStatistics.dll
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\TextStatistics.pdb
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\TextStatistics\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.csprojAssemblyReference.cache
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.csproj.CoreCompileInputs.cache
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.AssemblyInfoInputs.cache
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.AssemblyInfo.cs
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.csproj.CopyComplete
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.dll
+D:\work\DP\TextStatistics\obj\Debug\netcoreapp2.2\TextStatistics.pdb

@@ -398,7 +398,7 @@
           "lib/netcoreapp2.1/System.Threading.Channels.dll": {}
         }
       },
-      "redis/1.0.6": {
+      "redis/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1255,7 +1255,7 @@
         "version.txt"
       ]
     },
-    "redis/1.0.6": {
+    "redis/1.0.0": {
       "type": "project",
       "path": "../Redis/redis.csproj",
       "msbuildProject": "../Redis/redis.csproj"
@@ -1264,7 +1264,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "redis >= 1.0.6"
+      "redis >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1272,7 +1272,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.6",
+    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "D:\\work\\DP\\TextRankCalc\\textrankcalc.csproj",
       "projectName": "textrankcalc",
