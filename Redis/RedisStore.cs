@@ -7,20 +7,18 @@ namespace Redis
 {
     public class RedisStore
     {
-        private static Lazy<ConnectionMultiplexer> LazyConnectionTable;
-        private static Lazy<ConnectionMultiplexer> LazyConnectionRU;
-        private static Lazy<ConnectionMultiplexer> LazyConnectionEU;
-        private static Lazy<ConnectionMultiplexer> LazyConnectionUSA;
-        private static RedisStore _instance = null; 
-        private static readonly ConcurrentDictionary<string, string> _data = new ConcurrentDictionary<string, string>();
+        private static Lazy<ConnectionMultiplexer> _lazyConnectionTable;
+        private static Lazy<ConnectionMultiplexer> _lazyConnectionRu;
+        private static Lazy<ConnectionMultiplexer> _lazyConnectionEu;
+        private static Lazy<ConnectionMultiplexer> _lazyConnectionUsa;
+        private static RedisStore _instance; 
+        private static readonly ConcurrentDictionary<string, string> Data = new ConcurrentDictionary<string, string>();
 
         public static RedisStore getInstance()
         {
-            if (_instance == null) 
-            {
-                _instance = new RedisStore();
-                setSettings();
-            }
+            if (_instance != null) return _instance;
+            _instance = new RedisStore();
+            setSettings();
 
             return _instance;
         }
@@ -28,11 +26,11 @@ namespace Redis
         private RedisStore() {}
 
         public void addValue(string key, string value) {
-            _data[key] = value;
+            Data[key] = value;
         }
 
         public string getValue(string key) {
-            return _data[key];
+            return Data[key];
         }
 
         public static string SearchValueById(string id, string region) {
@@ -40,19 +38,17 @@ namespace Redis
             var dbeu = ConnectionEU.GetDatabase();
             var dbusa = ConnectionUSA.GetDatabase();
 
-            if (region == "rus" && dbrus.KeyExists(id)) {
-                return dbrus.StringGet(id);
+            switch (region)
+            {
+                case "rus" when dbrus.KeyExists(id):
+                    return dbrus.StringGet(id);
+                case "eu" when dbeu.KeyExists(id):
+                    return dbeu.StringGet(id);
+                case "usa" when dbusa.KeyExists(id):
+                    return dbusa.StringGet(id);
+                default:
+                    return null;
             }
-
-            if (region == "eu" && dbeu.KeyExists(id)) {
-                return dbeu.StringGet(id);
-            }
-
-            if (region == "usa" && dbusa.KeyExists(id)) {
-                return dbusa.StringGet(id);
-            }
-
-            return null;
         }
 
         private static void setSettings()
@@ -63,7 +59,7 @@ namespace Redis
                 EndPoints = { "localhost:6379" }
             };
 
-            RedisStore.LazyConnectionTable = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsTable));
+            _lazyConnectionTable = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsTable));
 
             var configurationOptionsEU = new ConfigurationOptions
             {
@@ -71,7 +67,7 @@ namespace Redis
                 EndPoints = { "localhost:8001" }
             };
 
-            RedisStore.LazyConnectionEU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsEU));
+            _lazyConnectionEu = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsEU));
 
             var configurationOptionsUSA = new ConfigurationOptions
             {
@@ -79,7 +75,7 @@ namespace Redis
                 EndPoints = { "localhost:8002" }
             };
 
-            RedisStore.LazyConnectionUSA = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
+            _lazyConnectionUsa = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsUSA));
 
             var configurationOptionsRU = new ConfigurationOptions
             {
@@ -87,7 +83,7 @@ namespace Redis
                 EndPoints = { "localhost:8003" }
             };
 
-            RedisStore.LazyConnectionRU = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
+            _lazyConnectionRu = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
         }
 
         public IDatabase RedisCache(string region) {
@@ -105,13 +101,13 @@ namespace Redis
             }
         }
 
-        public ConnectionMultiplexer ConnectionTable => LazyConnectionTable.Value;
+        public ConnectionMultiplexer ConnectionTable => _lazyConnectionTable.Value;
         public IDatabase RedisCacheTable => ConnectionTable.GetDatabase();
-        private static ConnectionMultiplexer ConnectionRU => LazyConnectionRU.Value;
+        private static ConnectionMultiplexer ConnectionRU => _lazyConnectionRu.Value;
         private static IDatabase RedisCacheRU => ConnectionRU.GetDatabase();
-        private static ConnectionMultiplexer ConnectionEU => LazyConnectionEU.Value;
+        private static ConnectionMultiplexer ConnectionEU => _lazyConnectionEu.Value;
         private static IDatabase RedisCacheEU => ConnectionEU.GetDatabase();
-        private static ConnectionMultiplexer ConnectionUSA => LazyConnectionUSA.Value;
+        private static ConnectionMultiplexer ConnectionUSA => _lazyConnectionUsa.Value;
         private static IDatabase RedisCacheUSA => ConnectionUSA.GetDatabase();
     }
 }

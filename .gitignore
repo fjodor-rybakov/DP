@@ -9,3 +9,7 @@ TextListener/bin/*
 TextRankCalc/bin/*
 
 build
+
+.idea
+
+.idea/*

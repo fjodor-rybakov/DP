@@ -6,9 +6,9 @@ namespace TextRankCalc
 {
     class Program
     {
-        const string COUNTER_HINTS_CHANNEL = "counter_hints";
-        const string COUNTER_QUEUE_NAME = "counter_queue";
-        static void Main(string[] args)
+        private const string COUNTER_HINTS_CHANNEL = "counter_hints";
+        private const string COUNTER_QUEUE_NAME = "counter_queue";
+        static void Main()
         {
             IDatabase db = RedisStore.getInstance().RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
@@ -20,7 +20,7 @@ namespace TextRankCalc
                 
                 SendMessage(value, db);
             });
-            Console.WriteLine("Obsevable subscribe text rank calc is ready. For exit press Enter.");
+            Console.WriteLine("Observable subscribe text rank calc is ready. For exit press Enter.");
             Console.ReadLine();
         }
 

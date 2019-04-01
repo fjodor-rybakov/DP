@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Frontend.Models;
@@ -70,9 +68,7 @@ namespace Frontend.Controllers
         private async Task<string> SendData(string message, string region)
         {
             HttpClient client = new HttpClient();
-            UserDataRegion userData = new UserDataRegion();
-            userData.message = message;
-            userData.region = region;
+            UserDataRegion userData = new UserDataRegion {message = message, region = region};
             string output = JsonConvert.SerializeObject(userData);
 
             HttpResponseMessage response = await client.PostAsJsonAsync($"{serverAddress}/api/values", output);

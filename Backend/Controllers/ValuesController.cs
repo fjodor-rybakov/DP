@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Concurrent;
-using StackExchange.Redis;
 using System.Threading;
 using Newtonsoft.Json;
 using Redis;
@@ -41,9 +36,8 @@ namespace Backend.Controllers
                     isError = false;
                     break;
                 }
-                else {
-                    Thread.Sleep(500);
-                }  
+
+                Thread.Sleep(500);
             }
 
             Console.WriteLine(value);
@@ -67,18 +61,18 @@ namespace Backend.Controllers
 
             var db = instance.RedisCacheTable;
             var pub = db.Multiplexer.GetSubscriber();
-            pub.Publish("events", getStrigifyUserData(userDataRegion, id));
+            pub.Publish("events", GetStringifyUserData(userDataRegion, id));
 
             instance.addValue($"RANK_{id}", contextId);
 
             return id;
         }
 
-        private string getStrigifyUserData(UserDataRegion userDataRegion, string id) {
-            UserData userData = new UserData();
-            userData.id = id;
-            userData.region = userDataRegion.region;
-            userData.message = userDataRegion.message;
+        private string GetStringifyUserData(UserDataRegion userDataRegion, string id) {
+            UserData userData = new UserData
+            {
+                id = id, region = userDataRegion.region, message = userDataRegion.message
+            };
 
             return JsonConvert.SerializeObject(userData);
         }

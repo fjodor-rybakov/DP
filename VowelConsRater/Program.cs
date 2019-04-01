@@ -21,9 +21,9 @@ namespace VowelConsRater
     }
     class Program
     {
-        const string RATE_HINTS_CHANNEL = "rate_hints";
-        const string RATE_QUEUE_NAME = "rate_queue";
-        static void Main(string[] args)
+        private const string RATE_HINTS_CHANNEL = "rate_hints";
+        private const string RATE_QUEUE_NAME = "rate_queue";
+        static void Main()
         {
             RedisStore instance = RedisStore.getInstance();
             IDatabase db = instance.RedisCacheTable;
@@ -40,25 +40,27 @@ namespace VowelConsRater
 
                     double relation = userDataCounter.countSoglasn == 0 ? 
                     0 : (double)userDataCounter.countGlasn / (double)userDataCounter.countSoglasn;
-                    string message = getStrigifyUserDataRater(userDataCounter, relation);
+                    string message = getStringifyUserDataRater(userDataCounter, relation);
 
                     instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", message);
 
                     msg = db.ListRightPop(RATE_QUEUE_NAME);
                 }
             });
-            Console.WriteLine("Obsevable subscribe vowel cons rater is ready. For exit press Enter.");
+            Console.WriteLine("Observable subscribe vowel cons rater is ready. For exit press Enter.");
             Console.ReadLine();
         }
 
-        private static string getStrigifyUserDataRater(UserDataCounter userDataCounter, double relation) {
-            UserDataRater userDataReter = new UserDataRater();
-            userDataReter.id = userDataCounter.id;
-            userDataReter.region = userDataCounter.region;
-            userDataReter.message = userDataCounter.message;
-            userDataReter.relation = relation;
+        private static string getStringifyUserDataRater(UserDataCounter userDataCounter, double relation) {
+            UserDataRater userDataRater = new UserDataRater
+            {
+                id = userDataCounter.id,
+                region = userDataCounter.region,
+                message = userDataCounter.message,
+                relation = relation
+            };
 
-            return JsonConvert.SerializeObject(userDataReter);
+            return JsonConvert.SerializeObject(userDataRater);
         } 
     }
 }

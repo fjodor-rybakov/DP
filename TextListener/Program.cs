@@ -6,7 +6,7 @@ namespace TextListener
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             IDatabase redis = RedisStore.getInstance().RedisCacheTable;
             var sub = redis.Multiplexer.GetSubscriber();
@@ -14,7 +14,7 @@ namespace TextListener
             {
                 Console.WriteLine("TextCreated: " + (string)message);
             });
-            Console.WriteLine("Obsevable subscribe text listener is ready. For exit press Enter.");
+            Console.WriteLine("Observable subscribe text listener is ready. For exit press Enter.");
             Console.ReadLine();
         }
     }
