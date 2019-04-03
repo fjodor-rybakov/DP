@@ -12,7 +12,12 @@ namespace TextListener
             var sub = redis.Multiplexer.GetSubscriber();
             sub.Subscribe("events", (channel, message) =>
             {
-                Console.WriteLine("TextCreated: " + (string)message);
+                string id = message;
+                var contextId = $"RANK_{id}";
+                int idDB = (int)redis.StringGet(contextId);
+                
+                var regionDB = RedisStore.getInstance().RedisCache(idDB);
+                Console.WriteLine("TextCreated: " + regionDB.StringGet(id));
             });
             Console.WriteLine("Observable subscribe text listener is ready. For exit press Enter.");
             Console.ReadLine();

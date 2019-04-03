@@ -23,7 +23,7 @@ namespace VowelConsCounter
         private const string COUNTER_QUEUE_NAME = "counter_queue";
         private const string RATE_HINTS_CHANNEL = "rate_hints";
         private const string RATE_QUEUE_NAME = "rate_queue";
-        static void Main(string[] args)
+        static void Main()
         {
             IDatabase db = RedisStore.getInstance().RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();

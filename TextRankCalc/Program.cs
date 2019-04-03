@@ -15,10 +15,12 @@ namespace TextRankCalc
             
             sub.Subscribe("events", (channel, message) =>
             {
-                string value = (string)message;
-                Console.WriteLine("Message: " + value);
+                string id = (string)message;
+                Console.WriteLine("Message: " + id);
+                var idDB = (int)db.StringGet($"RANK_{id}");
+                var regionDB = RedisStore.getInstance().RedisCache(idDB);
                 
-                SendMessage(value, db);
+                SendMessage(regionDB.StringGet(id), db);
             });
             
             Console.WriteLine("Observable subscribe text rank calc is ready. For exit press Enter.");

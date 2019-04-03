@@ -26,11 +26,12 @@ namespace Backend.Controllers
             string value = null;
             bool isError = true;
             var instance = RedisStore.getInstance();
+            var tableDB = instance.RedisCacheTable;
 
             for (int i = 0; i < 3; i++)
             {
-                string region = instance.getValue($"RANK_{id}");
-                value = RedisStore.SearchValueById($"RANK_{id}", region);
+                int idDB = (int)tableDB.StringGet($"RANK_{id}");
+                value = RedisStore.SearchValueById($"RANK_{id}", idDB);
                 if (value != null)
                 {
                     isError = false;
@@ -85,15 +86,18 @@ namespace Backend.Controllers
         {
             var id = Guid.NewGuid().ToString();
             UserDataRegion userDataRegion = JsonConvert.DeserializeObject<UserDataRegion>(json);
-            string contextId = userDataRegion.region;
             Console.WriteLine("Region: " + userDataRegion.region);
+            var contextId = $"RANK_{id}";
             var instance = RedisStore.getInstance();
 
+            var idDB = instance.GetNumDB(userDataRegion.region);
             var db = instance.RedisCacheTable;
+            var regionDb = instance.RedisCache(idDB);
+            db.StringSet(contextId, idDB);
+            regionDb.StringSet(id, GetStringifyUserData(userDataRegion, id));
+            
             var pub = db.Multiplexer.GetSubscriber();
-            pub.Publish("events", GetStringifyUserData(userDataRegion, id));
-
-            instance.addValue($"RANK_{id}", contextId);
+            pub.Publish("events", id);
 
             return id;
         }

@@ -25,26 +25,32 @@ namespace Redis
 
         private RedisStore() {}
 
-        public void addValue(string key, string value) {
-            Data[key] = value;
+        public int GetNumDB(string region) {
+            switch (region)
+            {
+                case "ru": 
+                    return 1;
+                case "eu": 
+                    return 2;
+               case "usa": 
+                    return 3;
+                default:
+                    return 1;
+            }
         }
 
-        public string getValue(string key) {
-            return Data[key];
-        }
-
-        public static string SearchValueById(string id, string region) {
+        public static string SearchValueById(string id, int idDb) {
             var dbrus = ConnectionRU.GetDatabase();
             var dbeu = ConnectionEU.GetDatabase();
             var dbusa = ConnectionUSA.GetDatabase();
 
-            switch (region)
+            switch (idDb)
             {
-                case "rus" when dbrus.KeyExists(id):
+                case 1 when dbrus.KeyExists(id):
                     return dbrus.StringGet(id);
-                case "eu" when dbeu.KeyExists(id):
+                case 2 when dbeu.KeyExists(id):
                     return dbeu.StringGet(id);
-                case "usa" when dbusa.KeyExists(id):
+                case 3 when dbusa.KeyExists(id):
                     return dbusa.StringGet(id);
                 default:
                     return null;
@@ -86,15 +92,15 @@ namespace Redis
             _lazyConnectionRu = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(configurationOptionsRU));
         }
 
-        public IDatabase RedisCache(string region) {
-            Console.WriteLine("Region: " + region);
-            switch(region)
+        public IDatabase RedisCache(int idDb) {
+            Console.WriteLine("idDb: " + idDb);
+            switch(idDb)
             {
-                case "rus": 
+                case 1: 
                     return ConnectionRU.GetDatabase();
-                case "eu": 
+                case 2: 
                     return ConnectionEU.GetDatabase();
-                case "usa": 
+                case 3: 
                     return ConnectionUSA.GetDatabase();
                 default: 
                     return ConnectionRU.GetDatabase();

@@ -49,8 +49,9 @@ namespace VowelConsRater
                     double relation = userDataCounter.countSoglasn == 0 ? 
                     0 : (double)userDataCounter.countGlasn / (double)userDataCounter.countSoglasn;
                     string message = GetStringifyUserDataRater(userDataCounter, relation);
+                    var idDB = (int)db.StringGet($"RANK_{userDataCounter.id}");
 
-                    instance.RedisCache(userDataCounter.region).StringSet($"RANK_{userDataCounter.id}", message);
+                    instance.RedisCache(idDB).StringSet($"RANK_{userDataCounter.id}", message);
 
                     msg = db.ListRightPop(RATE_QUEUE_NAME);
                     
