@@ -8,14 +8,17 @@ namespace TextRankCalc
     {
         private const string COUNTER_HINTS_CHANNEL = "counter_hints";
         private const string COUNTER_QUEUE_NAME = "counter_queue";
+        private const string EVENTS = "events";
         static void Main()
         {
             IDatabase db = RedisStore.getInstance().RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
             
-            sub.Subscribe("events", (channel, message) =>
+            sub.Subscribe(EVENTS, (channel, message) =>
             {
-                string id = (string)message;
+                string mes = (string)message;
+                if (mes.Split("=>")[0] != "TextCreated") return;
+                string id = mes.Split("=>")[1];
                 Console.WriteLine("Message: " + id);
                 var idDB = (int)db.StringGet($"RANK_{id}");
                 var regionDB = RedisStore.getInstance().RedisCache(idDB);

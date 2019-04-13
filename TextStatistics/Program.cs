@@ -21,7 +21,7 @@ namespace TextStatistics
     
     class Program
     {
-        private const string CHANNEL_RANK_CALCULATED = "TextRankCalculated";
+        private const string EVENTS = "events";
         private static double allTextStatistics;
         private static int textNum;
         private static int highRankPart;
@@ -33,9 +33,12 @@ namespace TextStatistics
             IDatabase db = instance.RedisCacheTable;
             var sub = db.Multiplexer.GetSubscriber();
 
-            sub.Subscribe(CHANNEL_RANK_CALCULATED, (channel, message) =>
+            sub.Subscribe(EVENTS, (channel, message) =>
             {
-                TextStatisticConsRater textStatisticConsRater = JsonConvert.DeserializeObject<TextStatisticConsRater>(message);
+                string mes = message;
+                if (mes.Split("=>")[0] != "TextRankCalculated") return;
+                string mesVal = mes.Split("=>")[1];
+                TextStatisticConsRater textStatisticConsRater = JsonConvert.DeserializeObject<TextStatisticConsRater>(mesVal);
                 Console.WriteLine(message);
                 allTextStatistics += textStatisticConsRater.rank;
                 textNum++;

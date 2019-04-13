@@ -18,7 +18,7 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-
+        private const string EVENTS = "events";
         // GET api/values/<id>
         [HttpGet("{id}")]
         public string Get(string id)
@@ -86,7 +86,6 @@ namespace Backend.Controllers
         {
             var id = Guid.NewGuid().ToString();
             UserDataRegion userDataRegion = JsonConvert.DeserializeObject<UserDataRegion>(json);
-            Console.WriteLine("Region: " + userDataRegion.region);
             var contextId = $"RANK_{id}";
             var instance = RedisStore.getInstance();
 
@@ -97,7 +96,8 @@ namespace Backend.Controllers
             regionDb.StringSet(id, GetStringifyUserData(userDataRegion, id));
             
             var pub = db.Multiplexer.GetSubscriber();
-            pub.Publish("events", id);
+            string message = "TextCreated=>" + id;
+            pub.Publish(EVENTS, message);
 
             return id;
         }

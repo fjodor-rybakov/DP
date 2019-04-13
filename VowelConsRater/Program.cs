@@ -20,7 +20,7 @@ namespace VowelConsRater
         public int countSoglasn;
     }
 
-    public class TextStatisticConsRater
+    public class TextRankCalculated
     {
         public string contextId;
         public double rank;
@@ -30,7 +30,7 @@ namespace VowelConsRater
     {
         private const string RATE_HINTS_CHANNEL = "rate_hints";
         private const string RATE_QUEUE_NAME = "rate_queue";
-        private const string CHANNEL_RANK_CALCULATED = "TextRankCalculated";
+        private const string EVENTS = "events";
         static void Main()
         {
             RedisStore instance = RedisStore.getInstance();
@@ -57,7 +57,7 @@ namespace VowelConsRater
                     
                     Console.WriteLine(GetStringifyTextStatisticConsRater(userDataCounter.id, relation));
 
-                    sub.Publish(CHANNEL_RANK_CALCULATED, GetStringifyTextStatisticConsRater(userDataCounter.id, relation));
+                    sub.Publish(EVENTS, GetStringifyTextStatisticConsRater(userDataCounter.id, relation));
                 }
             });
             Console.WriteLine("Observable subscribe vowel cons rater is ready. For exit press Enter.");
@@ -77,13 +77,13 @@ namespace VowelConsRater
         }
         
         private static string GetStringifyTextStatisticConsRater(string contextId, double rank) {
-            TextStatisticConsRater textStatisticConsRater = new TextStatisticConsRater
+            TextRankCalculated textRankCalculated = new TextRankCalculated
             {
                 contextId = contextId, 
                 rank = rank
             };
 
-            return JsonConvert.SerializeObject(textStatisticConsRater);
+            return "TextRankCalculated=>" + JsonConvert.SerializeObject(textRankCalculated);
         }
     }
 }

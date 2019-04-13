@@ -6,11 +6,12 @@ namespace TextListener
 {
     class Program
     {
+        private const string EVENTS = "events";
         static void Main()
         {
             IDatabase redis = RedisStore.getInstance().RedisCacheTable;
             var sub = redis.Multiplexer.GetSubscriber();
-            sub.Subscribe("events", (channel, message) =>
+            sub.Subscribe(EVENTS, (channel, message) =>
             {
                 string id = message;
                 var contextId = $"RANK_{id}";
