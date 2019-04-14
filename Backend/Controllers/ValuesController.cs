@@ -2,6 +2,7 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
+using APIError;
 using Newtonsoft.Json;
 using Redis;
 
@@ -25,6 +26,7 @@ namespace Backend.Controllers
     public class ValuesController : Controller
     {
         private const string EVENTS = "events";
+        private readonly ApiError _errors = new ApiError();
         // GET api/values/<id>
         [HttpGet("{id}")]
         public IActionResult Get(string id)
@@ -52,7 +54,7 @@ namespace Backend.Controllers
             if (isError)
             {
                 Console.WriteLine("Произошла ошибка");
-                return BadRequest(new Error{message = "Такого uid не существует или закончился лимит сообщений"});
+                return _errors.IncorrectUidOrLimit;
             }
 
             return Ok(value);

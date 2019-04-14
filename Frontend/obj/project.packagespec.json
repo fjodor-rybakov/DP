@@ -14,7 +14,11 @@
     ],
     "frameworks": {
       "netcoreapp2.2": {
-        "projectReferences": {}
+        "projectReferences": {
+          "D:\\work\\DP\\Assets\\APIError\\APIError.csproj": {
+            "projectPath": "D:\\work\\DP\\Assets\\APIError\\APIError.csproj"
+          }
+        }
       }
     },
     "warningProperties": {

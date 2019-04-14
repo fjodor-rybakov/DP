@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Frontend.Models;
 using System.Net.Http;
+using APIError;
 using Newtonsoft.Json;
 
 namespace Frontend.Controllers
@@ -20,15 +21,11 @@ namespace Frontend.Controllers
         public string message;
         public string region;
     }
-
-    public class Error
-    {
-        public string message;
-    }
     
     public class HomeController : Controller
     {
         private const string serverAddress = "http://localhost:5000";
+        private readonly ApiError _errors = new ApiError();
         
         public IActionResult Index()
         {
@@ -51,7 +48,7 @@ namespace Frontend.Controllers
             {
                 Error error = JsonConvert.DeserializeObject<Error>(json);
                 
-                ViewData["error_message"] = error.message;
+                ViewData["error_message"] = error.Message;
             }
             else
             {

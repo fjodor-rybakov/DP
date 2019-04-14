@@ -5363,6 +5363,16 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "APIError/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/APIError.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/APIError.dll": {}
+        }
       }
     }
   },
@@ -14214,10 +14224,16 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "APIError/1.0.0": {
+      "type": "project",
+      "path": "../Assets/APIError/APIError.csproj",
+      "msbuildProject": "../Assets/APIError/APIError.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "APIError >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Newtonsoft.Json >= 12.0.1"
@@ -14250,7 +14266,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\work\\DP\\Assets\\APIError\\APIError.csproj": {
+              "projectPath": "D:\\work\\DP\\Assets\\APIError\\APIError.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

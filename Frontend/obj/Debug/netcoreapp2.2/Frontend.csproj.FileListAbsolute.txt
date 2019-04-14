@@ -28,3 +28,5 @@ D:\work\DP\Frontend\obj\Debug\netcoreapp2.2\Frontend.dll
 D:\work\DP\Frontend\obj\Debug\netcoreapp2.2\Frontend.pdb
 D:\work\DP\Frontend\obj\Debug\netcoreapp2.2\Frontend.csproj.CopyComplete
 D:\work\DP\Frontend\obj\Debug\netcoreapp2.2\Razor\Views\Statistics\TextStatistic.g.cshtml.cs
+D:\work\DP\Frontend\bin\Debug\netcoreapp2.2\APIError.dll
+D:\work\DP\Frontend\bin\Debug\netcoreapp2.2\APIError.pdb

@@ -5442,6 +5442,16 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "APIError/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/APIError.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/APIError.dll": {}
+        }
+      },
       "redis/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -14440,6 +14450,11 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "APIError/1.0.0": {
+      "type": "project",
+      "path": "../Assets/APIError/APIError.csproj",
+      "msbuildProject": "../Assets/APIError/APIError.csproj"
+    },
     "redis/1.0.0": {
       "type": "project",
       "path": "../Redis/redis.csproj",
@@ -14448,6 +14463,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "APIError >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Newtonsoft.Json >= 12.0.1",
@@ -14482,6 +14498,9 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
+            "D:\\work\\DP\\Assets\\APIError\\APIError.csproj": {
+              "projectPath": "D:\\work\\DP\\Assets\\APIError\\APIError.csproj"
+            },
             "D:\\work\\DP\\Redis\\redis.csproj": {
               "projectPath": "D:\\work\\DP\\Redis\\redis.csproj"
             }

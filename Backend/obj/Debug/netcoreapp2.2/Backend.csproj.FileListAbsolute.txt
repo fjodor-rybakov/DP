@@ -15,3 +15,5 @@ D:\work\DP\Backend\obj\Debug\netcoreapp2.2\Backend.pdb
 D:\work\DP\backend\bin\Debug\netcoreapp2.2\redis.dll
 D:\work\DP\backend\bin\Debug\netcoreapp2.2\redis.pdb
 D:\work\DP\backend\obj\Debug\netcoreapp2.2\Backend.csproj.CopyComplete
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\APIError.dll
+D:\work\DP\Backend\bin\Debug\netcoreapp2.2\APIError.pdb

@@ -15,6 +15,9 @@
     "frameworks": {
       "netcoreapp2.2": {
         "projectReferences": {
+          "D:\\work\\DP\\Assets\\APIError\\APIError.csproj": {
+            "projectPath": "D:\\work\\DP\\Assets\\APIError\\APIError.csproj"
+          },
           "D:\\work\\DP\\Redis\\redis.csproj": {
             "projectPath": "D:\\work\\DP\\Redis\\redis.csproj"
           }

@@ -1,0 +1,16 @@
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\APIError.deps.json
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\APIError.dll
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\APIError.pdb
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.xml
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.xml
+D:\work\DP\Assets\APIError\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.csprojAssemblyReference.cache
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.csproj.CoreCompileInputs.cache
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.AssemblyInfoInputs.cache
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.AssemblyInfo.cs
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.csproj.CopyComplete
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.dll
+D:\work\DP\Assets\APIError\obj\Debug\netstandard2.0\APIError.pdb

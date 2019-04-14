@@ -22,7 +22,7 @@ namespace TextProcessingLimiter
         {
             if (args.Length != 1)
             {
-                Console.WriteLine("Not enough arguments");
+                Console.WriteLine("Not enough arguments. Must set count limit words");
                 return;
             }
             
@@ -36,7 +36,8 @@ namespace TextProcessingLimiter
             sub.Subscribe(EVENTS, (channel, message) =>
             {
                 string mes = message;
-                if (mes.Split("=>")[0] != TEXT_CREATED_EVENT) return;
+                string eventName = mes.Split("=>")[0];
+                if (eventName != TEXT_CREATED_EVENT) return;
                 var contextId = mes.Split("=>")[1];
                 countWords++;
                 status = countWords <= limitCountWords;
