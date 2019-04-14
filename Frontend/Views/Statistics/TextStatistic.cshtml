@@ -3,11 +3,20 @@
 }
 
 <div>
-    <h3>TextNum: @(ViewData["textNum"])</h3>
-
-    <h3>HighRankPart: @(ViewData["highRankPart"])</h3>
-
-    <h3>AvgRank:  @(ViewData["avgRank"])</h3>
+    @if (ViewData["error_message"] != null)
+    {
+        <h3>Error: @(ViewData["error_message"])</h3>
+    }
     
-    <h3>CountRejectRequests:  @(ViewData["countRejectRequests"])</h3>
+    @if (ViewData["textNum"] != null && ViewData["highRankPart"] != null && 
+         ViewData["avgRank"] != null && ViewData["countRejectRequests"] != null)
+    {
+        <h3>TextNum: @(ViewData["textNum"])</h3>
+
+        <h3>HighRankPart: @(ViewData["highRankPart"])</h3>
+
+        <h3>AvgRank: @(ViewData["avgRank"])</h3>
+
+        <h3>CountRejectRequests: @(ViewData["countRejectRequests"])</h3>
+    }
 </div>

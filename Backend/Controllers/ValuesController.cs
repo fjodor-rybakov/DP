@@ -51,18 +51,12 @@ namespace Backend.Controllers
 
             Console.WriteLine(value);
 
-            if (isError)
-            {
-                Console.WriteLine("Произошла ошибка");
-                return _errors.IncorrectUidOrLimit;
-            }
-
-            return Ok(value);
+            return isError ? _errors.IncorrectUidOrLimit : Ok(value);
         }
 
         // GET api/values
         [HttpGet]
-        public string GetTextStatistic()
+        public IActionResult GetTextStatistic()
         {
             var instance = RedisStore.getInstance();
             var db = instance.RedisCacheTable;
@@ -81,12 +75,7 @@ namespace Backend.Controllers
                 Thread.Sleep(500);
             }
             
-            if (isError)
-            {
-                Console.WriteLine("Произошла ошибка");
-            }
-
-            return value;
+            return isError ? _errors.StatisticNotFound : Ok(value);
         }
 
         // POST api/values

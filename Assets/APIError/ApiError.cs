@@ -10,5 +10,6 @@ namespace APIError
     public class ApiError : Controller
     {
         public IActionResult IncorrectUidOrLimit => BadRequest(new Error{Message = "Такого uid не существует или закончился лимит сообщений"});
+        public IActionResult StatisticNotFound => NotFound(new Error{Message = "Статистика пока что отсутсвует"});
     }
 }
