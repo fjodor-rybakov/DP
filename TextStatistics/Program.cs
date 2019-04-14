@@ -17,15 +17,25 @@ namespace TextStatistics
         public int textNum;
         public int highRankPart;
         public double avgRank;
+        public int countRejectRequests;
+    }
+    
+    public class ProcessingAccepted
+    {
+        public string contextId;
+        public bool status;
     }
     
     class Program
     {
         private const string EVENTS = "events";
+        public const string TEXT_RANK_CALCULATED_EVENT = "TextRankCalculated";
+        private const string PROCESSING_ACCEPTED_EVENT = "ProcessingAccepted";
         private static double allTextStatistics;
         private static int textNum;
         private static int highRankPart;
         private static double avgRank;
+        private static int countRejectRequests;
         
         static void Main()
         {
@@ -36,36 +46,51 @@ namespace TextStatistics
             sub.Subscribe(EVENTS, (channel, message) =>
             {
                 string mes = message;
-                if (mes.Split("=>")[0] != "TextRankCalculated") return;
-                string mesVal = mes.Split("=>")[1];
-                TextStatisticConsRater textStatisticConsRater = JsonConvert.DeserializeObject<TextStatisticConsRater>(mesVal);
-                Console.WriteLine(message);
-                allTextStatistics += textStatisticConsRater.rank;
-                textNum++;
-
-                if (textStatisticConsRater.rank > 0.5)
+                string eventName = mes.Split("=>")[0];
+                if (eventName == TEXT_RANK_CALCULATED_EVENT)
                 {
-                    highRankPart++;
+                    string mesVal = mes.Split("=>")[1];
+                    TextStatisticConsRater textStatisticConsRater = JsonConvert.DeserializeObject<TextStatisticConsRater>(mesVal);
+                    Console.WriteLine(message);
+                    allTextStatistics += textStatisticConsRater.rank;
+                    textNum++;
+
+                    if (textStatisticConsRater.rank > 0.5)
+                    {
+                        highRankPart++;
+                    }
+
+                    avgRank = allTextStatistics / textNum;
                 }
 
-                avgRank = allTextStatistics / textNum;
+                if (eventName == PROCESSING_ACCEPTED_EVENT)
+                {
+                    string mesVal = mes.Split("=>")[1];
+                    ProcessingAccepted processingAccepted = JsonConvert.DeserializeObject<ProcessingAccepted>(mesVal);
+                    if (!processingAccepted.status)
+                    {
+                        countRejectRequests++;
+                    }
+                }
                 
-                Console.WriteLine("textNum: " + textNum + ", highRankPart: " + highRankPart + ", avgRank: " + avgRank);
+                Console.WriteLine("textNum: " + textNum + ", highRankPart: " + highRankPart + 
+                                  ", avgRank: " + avgRank + ", countRejectRequests" + countRejectRequests);
 
-                db.StringSet("text_statistic", GetStringifyTextStatistic(textNum, highRankPart, avgRank));
+                db.StringSet("text_statistic", GetStringifyTextStatistic(textNum, highRankPart, avgRank, countRejectRequests));
             });
             
             Console.WriteLine("Observable subscribe text statistics is ready. For exit press Enter.");
             Console.ReadLine();
         }
 
-        private static string GetStringifyTextStatistic(int textNumValue, int highRankPartValue, double avgRankValue)
+        private static string GetStringifyTextStatistic(int textNumValue, int highRankPartValue, double avgRankValue, int countRejectRequestsValue)
         {
             TextStatistic textStatistic = new TextStatistic
             {
                 textNum = textNumValue,
                 highRankPart = highRankPartValue,
-                avgRank = avgRankValue
+                avgRank = avgRankValue,
+                countRejectRequests = countRejectRequestsValue
             };
             
             return JsonConvert.SerializeObject(textStatistic);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using Newtonsoft.Json;
@@ -11,6 +12,11 @@ namespace Backend.Controllers
         public string region;
     }
 
+    public class Error
+    {
+        public string message;
+    }
+
     public class UserData : UserDataRegion {
         public string id;
     }
@@ -21,7 +27,7 @@ namespace Backend.Controllers
         private const string EVENTS = "events";
         // GET api/values/<id>
         [HttpGet("{id}")]
-        public string Get(string id)
+        public IActionResult Get(string id)
         {
             string value = null;
             bool isError = true;
@@ -46,9 +52,10 @@ namespace Backend.Controllers
             if (isError)
             {
                 Console.WriteLine("Произошла ошибка");
+                return BadRequest(new Error{message = "Такого uid не существует или закончился лимит сообщений"});
             }
 
-            return value;
+            return Ok(value);
         }
 
         // GET api/values

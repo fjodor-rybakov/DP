@@ -1,0 +1,14 @@
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\TextProcessingLimiter.deps.json
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\TextProcessingLimiter.runtimeconfig.json
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\TextProcessingLimiter.runtimeconfig.dev.json
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\TextProcessingLimiter.dll
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\TextProcessingLimiter.pdb
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\redis.dll
+D:\work\DP\TextProcessingLimiter\bin\Debug\netcoreapp2.2\redis.pdb
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.csprojAssemblyReference.cache
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.csproj.CoreCompileInputs.cache
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.AssemblyInfoInputs.cache
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.AssemblyInfo.cs
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.csproj.CopyComplete
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.dll
+D:\work\DP\TextProcessingLimiter\obj\Debug\netcoreapp2.2\TextProcessingLimiter.pdb

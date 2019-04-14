@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Frontend.Models;
@@ -20,6 +21,11 @@ namespace Frontend.Controllers
         public string region;
     }
 
+    public class Error
+    {
+        public string message;
+    }
+    
     public class HomeController : Controller
     {
         private const string serverAddress = "http://localhost:5000";
@@ -41,11 +47,20 @@ namespace Frontend.Controllers
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync($"{serverAddress}/api/values/{id}");
             string json = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(json);
-            UserDataRater userDataRater = JsonConvert.DeserializeObject<UserDataRater>(json);
+            if (response.StatusCode >= HttpStatusCode.BadRequest)
+            {
+                Error error = JsonConvert.DeserializeObject<Error>(json);
+                
+                ViewData["error_message"] = error.message;
+            }
+            else
+            {
+                UserDataRater userDataRater = JsonConvert.DeserializeObject<UserDataRater>(json);
             
-            ViewData["relation"] = userDataRater.relation;
-            ViewData["region"] = userDataRater.region;
+                ViewData["relation"] = userDataRater.relation;
+                ViewData["region"] = userDataRater.region;
+            }
+            Console.WriteLine(json);
 
             return View();
         }

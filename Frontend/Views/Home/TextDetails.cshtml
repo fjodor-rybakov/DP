@@ -5,8 +5,16 @@
 <div>
     <h3>id: @(ViewContext.RouteData.Values["id"])</h3>
 
-    <h3>relation: @(ViewData["relation"])</h3>
-
-    <h3>region: @(ViewData["region"])</h3>
+    @if (ViewData["error_message"] != null)
+    {
+        <h3>Error: @(ViewData["error_message"])</h3>
+    }
+    
+    @if (ViewData["relation"] != null && ViewData["region"] != null)
+    {
+        <h3>Relation: @(ViewData["relation"])</h3>
+        
+        <h3>Region: @(ViewData["region"])</h3>
+    }
 </div>
 

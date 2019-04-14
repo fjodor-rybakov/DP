@@ -13,6 +13,7 @@ namespace Frontend.Controllers
         public int textNum;
         public int highRankPart;
         public double avgRank;
+        public int countRejectRequests;
     }
     
     public class StatisticsController : Controller
@@ -31,10 +32,12 @@ namespace Frontend.Controllers
             ViewData["textNum"] = textStatistic.textNum;
             ViewData["highRankPart"] = textStatistic.highRankPart;
             ViewData["avgRank"] = textStatistic.avgRank;
+            ViewData["countRejectRequests"] = textStatistic.countRejectRequests;
 
             Console.WriteLine("textNum: " + ViewData["textNum"] +
                               ", highRankPart: " + ViewData["highRankPart"] +
-                              ", avgRank: " + ViewData["avgRank"]);
+                              ", avgRank: " + ViewData["avgRank"] + 
+                              ", countRejectRequests: " + ViewData["countRejectRequests"]);
 
             
             return View();

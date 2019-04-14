@@ -10,6 +10,7 @@ set path_text_rank_calc=%work_dir%\TextRankCalc
 set path_vowel_cons_counter=%work_dir%\VowelConsCounter
 set path_vowel_cons_rater=%work_dir%\VowelConsRater
 set path_text_statistic=%work_dir%\TextStatistics
+set path_processing_limiter=%work_dir%\TextProcessingLimiter
 
 set path_frontend_publish=%path_frontend%\bin\Debug\netcoreapp2.2\publish
 set path_backend_publish=%path_backend%\bin\Debug\netcoreapp2.2\publish
@@ -18,6 +19,7 @@ set path_text_rank_calc_publish=%path_text_rank_calc%\bin\Debug\netcoreapp2.2\pu
 set path_vowel_cons_counter_publish=%path_vowel_cons_counter%\bin\Debug\netcoreapp2.2\publish
 set path_vowel_cons_rater_publish=%path_vowel_cons_rater%\bin\Debug\netcoreapp2.2\publish
 set path_text_statistic_publish=%path_text_statistic%\bin\Debug\netcoreapp2.2\publish
+set path_processing_limiter_publish=%path_processing_limiter%\bin\Debug\netcoreapp2.2\publish
 
 if defined version (
 	cd %path_frontend%
@@ -33,6 +35,8 @@ if defined version (
 	cd %path_vowel_cons_rater%
 	dotnet publish
 	cd %path_text_statistic%
+	dotnet publish
+	cd %path_processing_limiter%
 	dotnet publish
 	
 	cd..
@@ -71,6 +75,10 @@ if defined version (
 		mkdir TextStatistics
 		cd TextStatistics
 		xcopy %path_text_statistic_publish% /S
+		cd..
+		mkdir TextProcessingLimiter
+		cd TextProcessingLimiter
+		xcopy %path_processing_limiter_publish% /S
 		cd..
 		
 		xcopy %work_dir%\run.bat %work_dir%\build\%version%
