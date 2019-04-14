@@ -13,11 +13,6 @@ namespace Backend.Controllers
         public string region;
     }
 
-    public class Error
-    {
-        public string message;
-    }
-
     public class UserData : UserDataRegion {
         public string id;
     }
@@ -25,7 +20,7 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private const string EVENTS = "events";
+        private const string Events = "events";
         private readonly ApiError _errors = new ApiError();
         // GET api/values/<id>
         [HttpGet("{id}")]
@@ -34,12 +29,12 @@ namespace Backend.Controllers
             string value = null;
             bool isError = true;
             var instance = RedisStore.getInstance();
-            var tableDB = instance.RedisCacheTable;
+            var tableDb = instance.RedisCacheTable;
 
             for (int i = 0; i < 3; i++)
             {
-                int idDB = (int)tableDB.StringGet($"RANK_{id}");
-                value = RedisStore.SearchValueById($"RANK_{id}", idDB);
+                int idDb = (int)tableDb.StringGet($"RANK_{id}");
+                value = RedisStore.SearchValueById($"RANK_{id}", idDb);
                 if (value != null)
                 {
                     isError = false;
@@ -86,16 +81,16 @@ namespace Backend.Controllers
             UserDataRegion userDataRegion = JsonConvert.DeserializeObject<UserDataRegion>(json);
             var contextId = $"RANK_{id}";
             var instance = RedisStore.getInstance();
-
-            var idDB = instance.GetNumDB(userDataRegion.region);
             var db = instance.RedisCacheTable;
-            var regionDb = instance.RedisCache(idDB);
-            db.StringSet(contextId, idDB);
+
+            var idDb = instance.GetNumDB(userDataRegion.region);
+            var regionDb = instance.RedisCache(idDb);
+            db.StringSet(contextId, idDb);
             regionDb.StringSet(id, GetStringifyUserData(userDataRegion, id));
-            
+          
             var pub = db.Multiplexer.GetSubscriber();
             string message = "TextCreated=>" + id;
-            pub.Publish(EVENTS, message);
+            pub.Publish(Events, message);
 
             return id;
         }
