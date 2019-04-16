@@ -12,10 +12,17 @@ namespace TextProcessingLimiter
         public bool status;
     }
     
+    public class TextStatisticConsRater
+    {
+        public string contextId;
+        public double rank;
+    }
+    
     class Program
     {
         private const string TEXT_CREATED_EVENT = "TextCreated";
         private const string PROCESSING_ACCEPTED_EVENT = "ProcessingAccepted";
+        private const string TEXT_RANK_CALCULATED_EVENT = "TextRankCalculated";
         private const string EVENTS = "events";
         
         public static void Main(string[] args)
@@ -37,17 +44,30 @@ namespace TextProcessingLimiter
             {
                 string mes = message;
                 string eventName = mes.Split("=>")[0];
-                if (eventName != TEXT_CREATED_EVENT) return;
-                var contextId = mes.Split("=>")[1];
-                countWords++;
-                status = countWords <= limitCountWords;
-                sub.Publish(EVENTS, PublishMessage(contextId, status));
-                if (!status)
-                    Task.Run(async () => {
-                        await Task.Delay(60000);
-                        countWords = 0;
-                        Console.WriteLine("Reset!");
-                    });
+                if (eventName == TEXT_CREATED_EVENT)
+                {
+                    var contextId = mes.Split("=>")[1];
+                    countWords++;
+                    status = countWords <= limitCountWords;
+                    sub.Publish(EVENTS, PublishMessage(contextId, status));
+                    if (!status)
+                        Task.Run(async () => {
+                            await Task.Delay(60000);
+                            countWords = 0;
+                            Console.WriteLine("Reset!");
+                        });
+                }
+
+                if (eventName == TEXT_RANK_CALCULATED_EVENT)
+                {
+                    string mesVal = mes.Split("=>")[1];
+                    TextStatisticConsRater textStatisticConsRater = JsonConvert.DeserializeObject<TextStatisticConsRater>(mesVal);
+                    Console.WriteLine(message);
+                    if (textStatisticConsRater.rank <= 0.5)
+                    {
+                        countWords--;
+                    }
+                }
             });
            
             

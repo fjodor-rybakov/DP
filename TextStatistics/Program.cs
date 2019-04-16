@@ -29,7 +29,7 @@ namespace TextStatistics
     class Program
     {
         private const string EVENTS = "events";
-        public const string TEXT_RANK_CALCULATED_EVENT = "TextRankCalculated";
+        private const string TEXT_RANK_CALCULATED_EVENT = "TextRankCalculated";
         private const string PROCESSING_ACCEPTED_EVENT = "ProcessingAccepted";
         private static double allTextStatistics;
         private static int textNum;
@@ -72,7 +72,7 @@ namespace TextStatistics
                         countRejectRequests++;
                     }
                 }
-                
+
                 Console.WriteLine("textNum: " + textNum + ", highRankPart: " + highRankPart + 
                                   ", avgRank: " + avgRank + ", countRejectRequests" + countRejectRequests);
 

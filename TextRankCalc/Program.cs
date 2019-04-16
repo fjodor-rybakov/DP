@@ -14,6 +14,7 @@ namespace TextRankCalc
     {
         private const string COUNTER_HINTS_CHANNEL = "counter_hints";
         private const string COUNTER_QUEUE_NAME = "counter_queue";
+        private const string PROCESSING_ACCEPTED_EVENT = "ProcessingAccepted";
         private const string EVENTS = "events";
         static void Main()
         {
@@ -22,8 +23,8 @@ namespace TextRankCalc
             
             sub.Subscribe(EVENTS, (channel, message) =>
             {
-                string mes = (string)message;
-                if (mes.Split("=>")[0] != "ProcessingAccepted") return;
+                string mes = message;
+                if (mes.Split("=>")[0] != PROCESSING_ACCEPTED_EVENT) return;
                 string mesVal = mes.Split("=>")[1];
                 ProcessingAccepted processingAccepted = JsonConvert.DeserializeObject<ProcessingAccepted>(mesVal);
                 Console.WriteLine("Message: " + mesVal);
@@ -31,10 +32,10 @@ namespace TextRankCalc
                 
                 var id = processingAccepted.contextId;
                 
-                var idDB = (int)db.StringGet($"RANK_{id}");
-                var regionDB = RedisStore.getInstance().RedisCache(idDB);
+                var idDb = (int)db.StringGet($"RANK_{id}");
+                var regionDb = RedisStore.getInstance().RedisCache(idDb);
                 
-                SendMessage(regionDB.StringGet(id), db);
+                SendMessage(regionDb.StringGet(id), db);
             });
             
             Console.WriteLine("Observable subscribe text rank calc is ready. For exit press Enter.");
