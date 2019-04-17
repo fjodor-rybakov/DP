@@ -5442,7 +5442,7 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "APIError/1.0.0": {
+      "APIError/1.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "compile": {
@@ -5452,7 +5452,7 @@
           "bin/placeholder/APIError.dll": {}
         }
       },
-      "redis/1.0.0": {
+      "redis/1.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -14450,12 +14450,12 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "APIError/1.0.0": {
+    "APIError/1.0.2": {
       "type": "project",
       "path": "../Assets/APIError/APIError.csproj",
       "msbuildProject": "../Assets/APIError/APIError.csproj"
     },
-    "redis/1.0.0": {
+    "redis/1.0.2": {
       "type": "project",
       "path": "../Redis/redis.csproj",
       "msbuildProject": "../Redis/redis.csproj"
@@ -14463,11 +14463,11 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "APIError >= 1.0.0",
+      "APIError >= 1.0.2",
       "Microsoft.AspNetCore.All >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Newtonsoft.Json >= 12.0.1",
-      "redis >= 1.0.0"
+      "redis >= 1.0.2"
     ]
   },
   "packageFolders": {
@@ -14475,7 +14475,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.0.2",
     "restore": {
       "projectUniqueName": "D:\\work\\DP\\Backend\\Backend.csproj",
       "projectName": "Backend",
